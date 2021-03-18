@@ -83,7 +83,7 @@ class My_list extends Cit_Controller
         }
     }
 	
-	echo "hiii";
+
 
 
     /**
