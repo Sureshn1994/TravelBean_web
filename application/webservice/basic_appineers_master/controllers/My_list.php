@@ -82,6 +82,8 @@ class My_list extends Cit_Controller
              break;
         }
     }
+	
+	echo "hiii";
 
 
     /**
