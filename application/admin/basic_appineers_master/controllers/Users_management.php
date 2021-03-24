@@ -1015,7 +1015,7 @@ class Users_management extends Cit_Controller
             $data["dLatitude"] = $u_latitude;
             $data["dLongitude"] = $u_longitude;
             $data["ePushNotify"] = $u_push_notify;
-            $data["tOneTimeTransaction"] = $u_one_time_transaction;
+            $data["eOneTimeTransaction"] = $u_one_time_transaction;
             if($u_status == "Inactive"){
                $data["vAccessToken"] = $u_access_token; 
             }
@@ -1052,7 +1052,7 @@ class Users_management extends Cit_Controller
             $save_data_arr["u_latitude"] = $data["dLatitude"];
             $save_data_arr["u_longitude"] = $data["dLongitude"];
             $save_data_arr["u_push_notify"] = $data["ePushNotify"];
-            $save_data_arr["u_one_time_transaction"] = $data["tOneTimeTransaction"];
+            $save_data_arr["u_one_time_transaction"] = $data["eOneTimeTransaction"];
             if($u_status == "Inactive"){
                $save_data_arr["u_access_token"] = $data["vAccessToken"]; 
             }

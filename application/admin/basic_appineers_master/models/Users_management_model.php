@@ -318,7 +318,7 @@ class Users_management_model extends CI_Model
             $this->db->select("u.dLatitude AS u_latitude");
             $this->db->select("u.dLongitude AS u_longitude");
             $this->db->select("u.ePushNotify AS u_push_notify");
-            $this->db->select("u.tOneTimeTransaction AS u_one_time_transaction");
+           // $this->db->select("u.tOneTimeTransaction AS u_one_time_transaction");
             $this->db->select("u.vAccessToken AS u_access_token");
             $this->db->select("u.vResetPasswordCode AS u_reset_password_code");
             $this->db->select("u.vEmailVerificationCode AS u_email_verification_code");
@@ -991,6 +991,21 @@ class Users_management_model extends CI_Model
                 "lang_code" => "USERS_MANAGEMENT_ZIP_CODE",
                 "label_lang" => $this->lang->line('USERS_MANAGEMENT_ZIP_CODE')
             ),
+
+                 "u_one_time_transaction" => array(
+                "name" => "u_one_time_transaction",
+                "table_name" => "users",
+                "table_alias" => "u",
+                "field_name" => "eOneTimeTransaction",
+                "entry_type" => "Table",
+                "data_type" => "enum",
+                "show_input" => "Both",
+                "type" => "textbox",
+                "label" => "Go Ad Free",
+                "lang_code" => "USERS_MANAGEMENT_GO_ADD_FREE",
+                "label_lang" => $this->lang->line('USERS_MANAGEMENT_GO_ADD_FREE')
+            ),
+
                 "u_terms_conditions_version" => array(
                 "name" => "u_terms_conditions_version",
                 "table_name" => "users",
@@ -1107,7 +1122,7 @@ class Users_management_model extends CI_Model
                 "data_type" => "text",
                 "show_input" => "Hidden",
                 "type" => "textbox",
-                "label" => "One Time Transaction",
+                "label" => "Go add Free",
                 "lang_code" => "USERS_MANAGEMENT_ONE_TIME_TRANSACTION",
                 "label_lang" => $this->lang->line('USERS_MANAGEMENT_ONE_TIME_TRANSACTION')
             ),

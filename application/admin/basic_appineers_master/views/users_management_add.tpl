@@ -350,6 +350,28 @@
                     </div>
                     <div class="error-msg-form "><label class='error' id='u_zip_codeErr'></label></div>
                 </div>
+
+                 <div class="form-row row-fluid " id="cc_sh_u_one_time_transaction">
+                <label class="form-label span3 ">
+                    <%$form_config['u_one_time_transaction']['label_lang']%>
+                </label> 
+                <div class="form-right-div  <%if $mode eq 'Update'%>frm-elements-div<%/if%> ">
+                    <%if $mode eq "Update"%>
+                        <input type="hidden" class="ignore-valid" name="u_one_time_transaction" id="u_one_time_transaction" value="<%$data['u_one_time_transaction']|@htmlentities%>" />
+                        <span class="frm-data-label">
+                            <strong>
+                                <%if $data['u_one_time_transaction'] neq ""%>
+                                    <%$data['u_one_time_transaction']%>
+                                <%else%>
+                                <%/if%>
+                            </strong></span>
+                        <%else%>
+                            <input type="text" placeholder="" value="<%$data['u_one_time_transaction']|@htmlentities%>" name="u_one_time_transaction" id="u_one_time_transaction" title="<%$this->lang->line('USERS_MANAGEMENT_ZIP_CODE')%>"  data-ctrl-type='textbox'  class='frm-size-medium'  />
+                        <%/if%>
+                    </div>
+                    <div class="error-msg-form "><label class='error' id='u_one_time_transactionErr'></label></div>
+                </div>
+
                 <div class="form-row row-fluid " id="cc_sh_u_terms_conditions_version">
                     <label class="form-label span3 ">
                         <%$form_config['u_terms_conditions_version']['label_lang']%>
