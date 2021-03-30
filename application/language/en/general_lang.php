@@ -1138,6 +1138,8 @@ $lang["FEEDBACK_MANAGEMENT_DEVICE_TYPE"] = "Device Type" ;
 $lang["FEEDBACK_MANAGEMENT_DEVICE_MODEL"] = "Device Model" ;
 $lang["FEEDBACK_MANAGEMENT_DEVICE_OS"] = "Device Os" ;
 $lang["USERS_MANAGEMENT_USERNAME"] = "Username" ;
+
+$lang["USERS_MANAGEMENT_GO_ADD_FREE"] = "Go ad free" ;
 $lang["USERS_MANAGEMENT_"] = "" ;
 $lang["QUERY_IMAGES_QUERY_IMAGES"] = "Query Images" ;
 $lang["QUERY_IMAGES_USER_QUERY_ID"] = "User Query Id" ;

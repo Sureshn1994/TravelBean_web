@@ -164,8 +164,8 @@
         "label": "<%$list_config['u_first_name']['label_lang']%>"
     },
     {
-        "name": "u_user_name",
-        "label": "<%$list_config['u_user_name']['label_lang']%>"
+        "name": "u_go_ad_free",
+        "label": "<%$list_config['u_go_ad_free']['label_lang']%>"
     },
     {
         "name": "u_email",
@@ -270,19 +270,19 @@
         "unformat": unformatAdminModuleEditLink
     },
     {
-        "name": "u_user_name",
-        "index": "u_user_name",
-        "label": "<%$list_config['u_user_name']['label_lang']%>",
+        "name": "u_go_ad_free",
+        "index": "u_go_ad_free",
+        "label": "<%$list_config['u_go_ad_free']['label_lang']%>",
         "labelClass": "header-align-left",
         "resizable": true,
-        "width": "<%$list_config['u_user_name']['width']%>",
-        "search": <%if $list_config['u_user_name']['search'] eq 'No' %>false<%else%>true<%/if%>,
-        "export": <%if $list_config['u_user_name']['export'] eq 'No' %>false<%else%>true<%/if%>,
-        "sortable": <%if $list_config['u_user_name']['sortable'] eq 'No' %>false<%else%>true<%/if%>,
-        "hidden": <%if $list_config['u_user_name']['hidden'] eq 'Yes' %>true<%else%>false<%/if%>,
-        "hideme": <%if $list_config['u_user_name']['hideme'] eq 'Yes' %>true<%else%>false<%/if%>,
-        "addable": <%if $list_config['u_user_name']['addable'] eq 'Yes' %>true<%else%>false<%/if%>,
-        "editable": <%if $list_config['u_user_name']['editable'] eq 'Yes' %>true<%else%>false<%/if%>,
+        "width": "<%$list_config['u_go_ad_free']['width']%>",
+        "search": <%if $list_config['u_go_ad_free']['search'] eq 'No' %>false<%else%>true<%/if%>,
+        "export": <%if $list_config['u_go_ad_free']['export'] eq 'No' %>false<%else%>true<%/if%>,
+        "sortable": <%if $list_config['u_go_ad_free']['sortable'] eq 'No' %>false<%else%>true<%/if%>,
+        "hidden": <%if $list_config['u_go_ad_free']['hidden'] eq 'Yes' %>true<%else%>false<%/if%>,
+        "hideme": <%if $list_config['u_go_ad_free']['hideme'] eq 'Yes' %>true<%else%>false<%/if%>,
+        "addable": <%if $list_config['u_go_ad_free']['addable'] eq 'Yes' %>true<%else%>false<%/if%>,
+        "editable": <%if $list_config['u_go_ad_free']['editable'] eq 'Yes' %>true<%else%>false<%/if%>,
         "align": "left",
         "edittype": "text",
         "editrules": {
@@ -292,21 +292,21 @@
             "attr": {
                 "aria-grid-id": el_tpl_settings.main_grid_id,
                 "aria-module-name": "users_management",
-                "aria-unique-name": "u_user_name",
+                "aria-unique-name": "u_go_ad_free",
                 "autocomplete": "off"
             },
             "sopt": strSearchOpts,
-            "searchhidden": <%if $list_config['u_user_name']['search'] eq 'Yes' %>true<%else%>false<%/if%>
+            "searchhidden": <%if $list_config['u_go_ad_free']['search'] eq 'Yes' %>true<%else%>false<%/if%>
         },
         "editoptions": {
             "aria-grid-id": el_tpl_settings.main_grid_id,
             "aria-module-name": "users_management",
-            "aria-unique-name": "u_user_name",
+            "aria-unique-name": "u_go_ad_free",
             "placeholder": "",
             "class": "inline-edit-row "
         },
         "ctrl_type": "textbox",
-        "default_value": "<%$list_config['u_user_name']['default']%>",
+        "default_value": "<%$list_config['u_go_ad_free']['default']%>",
         "filterSopt": "bw",
         "formatter": formatAdminModuleEditLink,
         "unformat": unformatAdminModuleEditLink

@@ -961,7 +961,10 @@ class Users_management extends Cit_Controller
             $u_profile_image = $params_arr["u_profile_image"];
             $u_first_name = $params_arr["u_first_name"];
             $u_last_name = $params_arr["u_last_name"];
-            $u_user_name = $params_arr["u_user_name"];
+            $u_go_ad_free = $params_arr["u_go_ad_free"];
+           
+
+
             $u_email = $params_arr["u_email"];
             $u_mobile_no = $params_arr["u_mobile_no"];
             $u_dob = $params_arr["u_dob"];
@@ -999,7 +1002,8 @@ class Users_management extends Cit_Controller
             $data["vProfileImage"] = $u_profile_image;
             $data["vFirstName"] = $u_first_name;
             $data["vLastName"] = $u_last_name;
-            $data["vUserName"] = $u_user_name;
+            $data["eOneTimeTransaction"] = $u_go_ad_free;
+
             $data["vEmail"] = $u_email;
             $data["vMobileNo"] = $u_mobile_no;
             $data["dDob"] = $this->filter->formatActionData($u_dob, $form_config["u_dob"]);
@@ -1036,7 +1040,7 @@ class Users_management extends Cit_Controller
             $save_data_arr["u_profile_image"] = $data["vProfileImage"];
             $save_data_arr["u_first_name"] = $data["vFirstName"];
             $save_data_arr["u_last_name"] = $data["vLastName"];
-            $save_data_arr["u_user_name"] = $data["vUserName"];
+            $save_data_arr["u_go_ad_free"] = $data["eOneTimeTransaction"];
             $save_data_arr["u_email"] = $data["vEmail"];
             $save_data_arr["u_mobile_no"] = $data["vMobileNo"];
             $save_data_arr["u_dob"] = $data["dDob"];

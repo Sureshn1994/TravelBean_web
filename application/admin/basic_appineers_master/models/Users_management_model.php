@@ -74,7 +74,7 @@ class Users_management_model extends CI_Model
         $this->primary_key = "iUserId";
         $this->primary_alias = "u_user_id";
         $this->physical_data_remove = "Yes";
-        $this->grid_fields = array("u_profile_image", "u_first_name", "u_user_name", "u_email", "u_mobile_no", "u_added_at", "u_status", "u_updated_at");
+        $this->grid_fields = array("u_profile_image", "u_first_name", "u_go_ad_free", "u_email", "u_mobile_no", "u_added_at", "u_status", "u_updated_at");
         $this->join_tables = array();
         $this->extra_cond = "";
         $this->groupby_cond = array();
@@ -289,7 +289,7 @@ class Users_management_model extends CI_Model
             }
             $this->db->select("u.vProfileImage AS u_profile_image");
         $this->db->select("concat(u.vFirstName,\"\",u.vLastName) AS u_first_name");
-        $this->db->select("u.vUserName AS u_user_name");
+        $this->db->select("u.eOneTimeTransaction AS u_go_ad_free");
         $this->db->select("u.vEmail AS u_email");
         $this->db->select("u.vMobileNo AS u_mobile_no");
         $this->db->select("u.dtAddedAt AS u_added_at");
@@ -456,7 +456,7 @@ class Users_management_model extends CI_Model
         }
         $this->db->select("u.vProfileImage AS u_profile_image");
         $this->db->select("concat(u.vFirstName,\"\",u.vLastName) AS u_first_name");
-        $this->db->select("u.vUserName AS u_user_name");
+        $this->db->select("u.eOneTimeTransaction AS u_go_ad_free");
         $this->db->select("u.vEmail AS u_email");
         $this->db->select("u.vMobileNo AS u_mobile_no");
         $this->db->select("u.dtAddedAt AS u_added_at");
@@ -558,7 +558,7 @@ class Users_management_model extends CI_Model
         }
         $this->db->select("u.vProfileImage AS u_profile_image");
         $this->db->select("concat(u.vFirstName,\"\",u.vLastName) AS u_first_name");
-        $this->db->select("u.vUserName AS u_user_name");
+        $this->db->select("u.eOneTimeTransaction AS u_go_ad_free");
         $this->db->select("u.vEmail AS u_email");
         $this->db->select("u.vMobileNo AS u_mobile_no");
         $this->db->select("u.dtAddedAt AS u_added_at");
@@ -671,22 +671,22 @@ class Users_management_model extends CI_Model
                 "viewedit" => "No",
                 "edit_link" => "Yes"
             ),
-                "u_user_name" => array(
-                "name" => "u_user_name",
+                "u_go_ad_free" => array(
+                "name" => "u_go_ad_free",
                 "table_name" => "users",
                 "table_alias" => "u",
-                "field_name" => "vUserName",
-                "source_field" => "u_user_name",
-                "display_query" => "u.vUserName",
+                "field_name" => "eOneTimeTransaction",
+                "source_field" => "u_go_ad_free",
+                "display_query" => "u.eOneTimeTransaction",
                 "entry_type" => "Table",
                 "data_type" => "varchar",
                 "show_in" => "Both",
                 "type" => "textbox",
                 "align" => "left",
-                "label" => "Username",
-                "lang_code" => "USERS_MANAGEMENT_USERNAME",
-                "label_lang" => $this->lang->line('USERS_MANAGEMENT_USERNAME'),
-                "width" => 50,
+                "label" => "Go Ad free",
+                "lang_code" => "USERS_MANAGEMENT_GO_ADD_FREE",
+                "label_lang" => $this->lang->line('USERS_MANAGEMENT_GO_ADD_FREE'),
+                "width" => 80,
                 "search" => "Yes",
                 "export" => "Yes",
                 "sortable" => "Yes",
