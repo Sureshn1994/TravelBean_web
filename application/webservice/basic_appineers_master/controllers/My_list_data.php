@@ -9,12 +9,13 @@ defined('BASEPATH') || exit('No direct script access allowed');
  * @package basic_appineers_master
  *
  * @subpackage controllers
+
  *
- * @module Set store review
+ * @module My List Data
  *
- * @class set_store_review.php
+ * @class My_list_data.php
  *
- * @path application\webservice\basic_appineers_master\controllers\My_lists.php
+ * @path application\webservice\basic_appineers_master\controllers\My_list_data.php
  *
  * @version 4.4
  *
@@ -23,7 +24,7 @@ defined('BASEPATH') || exit('No direct script access allowed');
  * @since 08.03.2021
  */
 
-class My_list extends Cit_Controller
+class My_list_data extends Cit_Controller
 {
     public $settings_params;
     public $output_params;
@@ -40,17 +41,15 @@ class My_list extends Cit_Controller
         $this->settings_params = array();
         $this->output_params = array();
         $this->single_keys = array(
-            "set_my_lists",
-            "get_my_lists",
+            "set_my_lists_data",
+            "get_my_lists_data",
         );
         $this->block_result = array();
 
         $this->load->library('wsresponse');
-        $this->load->model('my_list_model');
+        $this->load->model('my_list_data_model');
         
     }
-
-
 
 
     /**
@@ -61,8 +60,10 @@ class My_list extends Cit_Controller
      * @param bool $inner_api inner_api flag is used to idetify whether it is inner api request or general request.
      * @return array $output_response returns output response of API.
      */
-    public function start_my_list($request_arr = array(), $inner_api = FALSE)
+    public function start_my_list_data($request_arr = array(), $inner_api = FALSE)
     {
+
+        
         // get the HTTP method, path and body of the request
         
         $method = $_SERVER['REQUEST_METHOD'];
@@ -70,21 +71,22 @@ class My_list extends Cit_Controller
 
         switch ($method) {
           case 'GET':
-             $output_response =  $this->get_my_list($request_arr);     
+             $output_response =  $this->get_my_list_data($request_arr);     
              return  $output_response;
              break;
          
           case 'POST':
-           $output_response =  $this->add_my_list($request_arr);
+           $output_response =  $this->add_my_list_data($request_arr);
            return  $output_response;
              break;
           case 'DELETE':
-           $output_response =  $this->delete_my_list($request_arr);
+           $output_response =  $this->delete_my_list_data($request_arr);
            return  $output_response;
              break;
         }
     }
 	
+
 
 
 
@@ -95,7 +97,7 @@ class My_list extends Cit_Controller
      * @param array $request_arr request_arr array is used for api input.
      * @return array $valid_res returns output response of API.
      */
-    public function rules_add_service($request_arr = array())
+    public function rules_add_my_list_data($request_arr = array())
     {       
         $valid_arr = array(
             "user_id" => array(
@@ -105,6 +107,22 @@ class My_list extends Cit_Controller
                     "message" => "user_id_required",
                 )
             ),
+
+             "item_name" => array(
+                array(
+                    "rule" => "required",
+                    "value" => TRUE,
+                    "message" => "item_name_required",
+                )
+            ),
+
+               "list_id" => array(
+                array(
+                    "rule" => "required",
+                    "value" => TRUE,
+                    "message" => "list_id_required",
+                )
+            ),
            
             );
         $valid_res = $this->wsresponse->validateInputParams($valid_arr, $request_arr, "add_my_list");
@@ -112,12 +130,12 @@ class My_list extends Cit_Controller
         return $valid_res;
     }
 
-    public function add_my_list($input_params){
+    public function add_my_list_data($input_params){
 
         try
         {
         
-            $validation_res = $this->rules_add_my_list($input_params);
+            $validation_res = $this->rules_add_my_list_data($input_params);
             if ($validation_res["success"] == "-5")
             {
                 if ($inner_api === TRUE)
@@ -134,7 +152,7 @@ class My_list extends Cit_Controller
            
             $output_array = $func_array = array();
 
-            $input_params = $this->set_my_list($input_params);
+            $input_params = $this->set_my_list_data($input_params);
 
             $condition_res = $this->is_posted($input_params);
 
@@ -158,16 +176,17 @@ class My_list extends Cit_Controller
     }
 
     /**
-     * set_my_lists method is used to process store my list .
+     * set_my_list_data method is used to process store my list .
      * @created Suresh Nakate
      * @param array $input_params input_params array to process loop flow.
      * @return array $input_params returns modfied input_params array.
      */
-    public function set_my_list($input_params = array())
+    public function set_my_list_data($input_params = array())
     {
         $this->block_result = array();
         try
         {
+
             $params_arr = array();
             
             if (isset($input_params["added_date"]))
@@ -176,48 +195,38 @@ class My_list extends Cit_Controller
             }else{
                $params_arr["_dtaddedat"] = "NOW()"; 
             }
-            if (isset($input_params["user_id"]))
+            if (isset($input_params["list_id"]))
             {
-                $params_arr["user_id"] = $input_params["user_id"];
+                $params_arr["list_id"] = $input_params["list_id"];
             }
-            if (isset($input_params["list_name"]))
+            if (isset($input_params["item_name"]))
             {
-                $params_arr["list_name"] = $input_params["list_name"];
+                $params_arr["item_name"] = $input_params["item_name"];
             }
-            if (isset($input_params["address"]))
+            if (isset($input_params["item_amout"]))
             {
-                $params_arr["address"] = $input_params["address"];
+                $params_arr["item_amout"] = $input_params["item_amout"];
             }
-            if (isset($input_params["to_country_code"]))
+            if (isset($input_params["tax_type"]))
             {
-                $params_arr["to_country_code"] = $input_params["to_country_code"];
+                $params_arr["tax_type"] = $input_params["tax_type"];
             }
-            if (isset($input_params["to_country_name"]))
+            if (isset($input_params["product_type"]))
             {
-                $params_arr["to_country_name"] = $input_params["to_country_name"];
+                $params_arr["product_type"] = $input_params["product_type"];
             }
-            if (isset($input_params["to_currency"]))
+            if (isset($input_params["tax_amout"]))
             {
-                $params_arr["to_currency"] = $input_params["to_currency"];
+                $params_arr["tax_amout"] = $input_params["tax_amout"];
             }
-            if (isset($input_params["continent"]))
+            if (isset($input_params["total_amout"]))
             {
-                $params_arr["continent"] = $input_params["continent"];
+                $params_arr["total_amout"] = $input_params["total_amout"];
             }
-            if (isset($input_params["from_country_code"]))
-            {
-                $params_arr["from_country_code"] = $input_params["from_country_code"];
-            }
-            if (isset($input_params["from_country_name"]))
-            {
-                $params_arr["from_country_name"] = $input_params["from_country_name"];
-            }
-            if (isset($input_params["from_currency"]))
-            {
-                $params_arr["from_currency"] = $input_params["from_currency"];
-            }
-      
-            $this->block_result = $this->my_list_model->set_my_list($params_arr);
+
+            $this->block_result = $this->my_list_data_model->set_my_list_data($params_arr);
+            
+            //$this->block_result = $this->my_list_model_data->set_my_list_data($params_arr);
 
             if (!$this->block_result["success"])
             {
@@ -230,7 +239,7 @@ class My_list extends Cit_Controller
             $success = 0;
             $this->block_result["data"] = array();
         }
-        $input_params["set_my_list"] = $this->block_result["data"];
+        $input_params["set_my_list_data"] = $this->block_result["data"];
         $input_params = $this->wsresponse->assignSingleRecord($input_params, $this->block_result["data"]);
         return $input_params;
     }
@@ -247,7 +256,7 @@ class My_list extends Cit_Controller
         $this->block_result = array();
         try
         {
-            $cc_lo_0 = (is_array($input_params["list_id"])) ? count($input_params["list_id"]):$input_params["list_id"];
+            $cc_lo_0 = (is_array($input_params["list_data_id"])) ? count($input_params["list_data_id"]):$input_params["list_data_id"];
             $cc_ro_0 = 0;
 
             $cc_fr_0 = ($cc_lo_0 > $cc_ro_0) ? TRUE : FALSE;
@@ -310,9 +319,9 @@ class My_list extends Cit_Controller
     public function user_service_finish_success($input_params = array())
     {
         $output_arr['settings']['success'] = "1";
-        $output_arr['settings']['message'] = "My Lists added successfully";
+        $output_arr['settings']['message'] = "My Lists data added successfully";
         // $output_arr['data'] = "";
-        $responce_arr = $this->wsresponse->sendWSResponse($output_arr, array(), "add_my_list");
+        $responce_arr = $this->wsresponse->sendWSResponse($output_arr, array(), "add_my_list_data");
 
         return $responce_arr;
     }
@@ -336,7 +345,7 @@ class My_list extends Cit_Controller
         $output_array["settings"]["fields"] = $output_fields;
         $output_array["data"] = $input_params;
 
-        $func_array["function"]["name"] = "add_my_list";
+        $func_array["function"]["name"] = "add_my_list_data";
         $func_array["function"]["single_keys"] = $this->single_keys;
         $func_array["function"]["multiple_keys"] = $this->multiple_keys;
 
@@ -365,11 +374,19 @@ class My_list extends Cit_Controller
                     "message" => "user_id_required",
                 )
             ),
+
+             "list_id" => array(
+                array(
+                    "rule" => "required",
+                    "value" => TRUE,
+                    "message" => "list_id_required",
+                )
+            ),
             
             );
         
         
-        $valid_res = $this->wsresponse->validateInputParams($valid_arr, $request_arr, "get_my_list");
+        $valid_res = $this->wsresponse->validateInputParams($valid_arr, $request_arr, "get_my_list_data");
 
         return $valid_res;
     }
@@ -381,7 +398,7 @@ class My_list extends Cit_Controller
      * @param bool $inner_api inner_api flag is used to idetify whether it is inner api request or general request.
      * @return array $output_response returns output response of API.
      */
-    public function get_my_list($request_arr = array(), $inner_api = FALSE)
+    public function get_my_list_data($request_arr = array(), $inner_api = FALSE)
     {
        try
         {
@@ -400,22 +417,23 @@ class My_list extends Cit_Controller
             $output_response = array();
             $input_params = $validation_res['input_params'];
             $output_array = $func_array = array();
-            $result_params = $this->get_all_list($input_params);
+
+            $input_params = $this->get_list_total($input_params);
+            $input_params = $this->get_all_list($input_params);
              
-            $condition_res = $this->is_posted($result_params);
+            $condition_res = $this->is_posted($input_params);
 
             if ($condition_res["success"])
             {
               
-               
-                $output_response = $this->get_list_finish_success($result_params);
+                $output_response = $this->get_list_finish_success($input_params);
                 return $output_response;
             }
 
             else
             {
  
-                $output_response = $this->get_list_finish_success_1($result_params);
+                $output_response = $this->get_list_finish_success_1($input_params);
                 return $output_response;
             }
         }
@@ -456,46 +474,23 @@ class My_list extends Cit_Controller
     }
 
     /**
-     * get_all_list method is used to process review block.
+     * get_list_total method is used to process get list total.
      * @created SUresh Nakate | 08.03.2021
      * @param array $input_params input_params array to process loop flow.
      * @return array $input_params returns modfied input_params array.
      */
-    public function get_all_list($input_params = array())
+    public function get_list_total($input_params = array())
     {
        
         $this->block_result = array();
         try
         {
-            $this->block_result = $this->my_list_model->get_list_details($input_params);
+            $this->block_result = $this->my_list_data_model->get_list_total($input_params);
             if (!$this->block_result["success"])
             {
                 throw new Exception("No records found.");
             }
             $result_arr = $this->block_result["data"];
-
-
-            if (is_array($result_arr) && count($result_arr) > 0)
-            {
-                $i = 0;
-                foreach ($result_arr as $data_key => $data_arr)
-                {
-                    $arrtotalData = $this->get_sum_list_amout($data_arr["list_id"]);
-
-                     if(!empty($arrtotalData)){
-                   foreach ($arrtotalData as $data_key2 => $data_arr2)
-                   {
-                    $result_arr[$data_key]["total_amout"] =$data_arr2['total_list_amout'];
-                    $result_arr[$data_key]["total_tax_amout"] =$data_arr2['total_tax_amout'];
-                   }
-                  }else{
-                    $result_arr[$data_key]["total_amout"] ="";
-                    $result_arr[$data_key]["total_tax_amout"] ="";
-                  }
-             } 
-
-             $this->block_result["data"] = $result_arr;  
-         }
                    
         }
         catch(Exception $e)
@@ -511,19 +506,41 @@ class My_list extends Cit_Controller
     }
 
 
-    public function get_sum_list_amout($list_id)
+
+     /**
+     * get_all_list method is used to process review block.
+     * @created SUresh Nakate | 08.03.2021
+     * @param array $input_params input_params array to process loop flow.
+     * @return array $input_params returns modfied input_params array.
+     */
+    public function get_all_list($input_params = array())
     {
-
-      $arrShareResult = array();
-      $arrShareResult = $this->my_list_model->get_sum_list_amout($list_id);
-
-       $result_arr =  $arrShareResult["data"];
-      $arrShareResult['data'] = $result_arr;
-      return $arrShareResult['data'] ;
+       
+        $this->block_result = array();
+        try
+        {
+            $this->block_result = $this->my_list_data_model->get_list_details($input_params);
+            if (!$this->block_result["success"])
+            {
+                throw new Exception("No records found.");
+            }
+            $result_arr = $this->block_result["data"];
+                   
+        }
+        catch(Exception $e)
+        {
+            $success = 0;
+            $this->block_result["data"] = array();
+        }
+        $input_params["get_all_list"] = $this->block_result["data"];
+        
+        $input_params = $this->wsresponse->assignSingleRecord($input_params, $this->block_result["data"]);
+        //print_r($input_params);exit;
+       return $input_params;
     }
 
 
-    public function delete_my_list($request_arr = array())
+    public function delete_my_list_data($request_arr = array())
     {
       try
         {
@@ -532,6 +549,7 @@ class My_list extends Cit_Controller
             $input_params = $request_arr;
 
             $condition_res = $this->check_list_exist($input_params);
+
 
 
             if ($condition_res["checkListExist"]["status"])
@@ -555,31 +573,7 @@ class My_list extends Cit_Controller
         return $output_response;  
     }
 
-    /**
-     * get_unread_count method is used to process custom function.
-     * @created kavita sawant |  04.03.2021
-     * @modified kavita sawant | 04.03.2021
-     * @param array $input_params input_params array to process loop flow.
-     * @return array $input_params returns modfied input_params array.
-     */
-    public function get_unread_count($input_params = array())
-    {
-        if (!method_exists($this, "getUnreadNotificationCount"))
-        {
-            $result_arr["data"] = array();
-        }
-        else
-        {
-            $result_arr["data"] = $this->getUnreadNotificationCount($input_params);
-        }
-        $format_arr = $result_arr;
-
-        $format_arr = $this->wsresponse->assignFunctionResponse($format_arr);
-        $input_params["get_unread_count"] = $format_arr;
-
-        $input_params = $this->wsresponse->assignSingleRecord($input_params, $format_arr);
-        return $input_params;
-    }
+    
 
     /**
      * delete_list method is used to process review block.
@@ -587,7 +581,7 @@ class My_list extends Cit_Controller
      * @param array $input_params input_params array to process loop flow.
      * @return array $input_params returns modfied input_params array.
      */
-    public function delete_list($input_params = array())
+    public function delete_data_list($input_params = array())
     {
 
       $this->block_result = array();
@@ -595,8 +589,8 @@ class My_list extends Cit_Controller
         {
             $arrResult = array();
 
-            $arrResult['list_id']  = isset($input_params["list_id"]) ? $input_params["list_id"] : "";
-            $this->block_result = $this->my_list_model->delete_list($arrResult);
+            $arrResult['list_data_id']  = isset($input_params["list_data_id"]) ? $input_params["list_data_id"] : "";
+            $this->block_result = $this->my_list_data_model->delete_data_list($arrResult);
             if (!$this->block_result["success"])
             {
                 throw new Exception("No records found.");
@@ -635,7 +629,7 @@ class My_list extends Cit_Controller
         $output_array["settings"]["fields"] = $output_fields;
         $output_array["data"] = $input_params;
 
-        $func_array["function"]["name"] = "delete_list";
+        $func_array["function"]["name"] = "delete_data_list";
         $func_array["function"]["single_keys"] = $this->single_keys;
 
         $this->wsresponse->setResponseStatus(200);
@@ -662,7 +656,7 @@ class My_list extends Cit_Controller
         $output_array["settings"]["fields"] = $output_fields;
         $output_array["data"] = $input_params;
 
-        $func_array["function"]["name"] = "delete_list";
+        $func_array["function"]["name"] = "delete_data_list";
         $func_array["function"]["single_keys"] = $this->single_keys;
 
         $this->wsresponse->setResponseStatus(200);
@@ -686,22 +680,20 @@ class My_list extends Cit_Controller
 
         $setting_fields = array(
             "success" => "1",
-            "message" => "get_list_finish_success"
+            "message" => "get_list_finish_success",
+            "total_list_amount"=> $input_params["total_list_amount"],
+             "total_list_tax_amount"=> $input_params["total_tax_amount"],
         );
          $output_fields = array(
+                "list_data_id",
                 "list_id",
-                "list_name",
-                "address",
-                "from_country_code",
-                "from_country_name",
-                "from_currency",
-                "continent",
-                "To_country_code",
-                "To_country_name",
-                "To_country_name",
+                "item_name",
+                "amount",
+                "tax_type",
+                "product_type",
+                "tax_amount",
+                "total_amount",
                 "created_date",
-                "total_amout",
-                "total_tax_amout",
              );
             $output_keys = array(
                 'get_all_list',
@@ -711,7 +703,7 @@ class My_list extends Cit_Controller
         $output_array["settings"]["fields"] = $output_fields;
         $output_array["data"] = $input_params;
 
-        $func_array["function"]["name"] = "get_my_list";
+        $func_array["function"]["name"] = "get_my_data_list";
         $func_array["function"]["output_keys"] = $output_keys;
         $func_array["function"]["single_keys"] = $this->single_keys;
         $func_array["function"]["multiple_keys"] = $this->multiple_keys;
@@ -743,7 +735,7 @@ class My_list extends Cit_Controller
         $output_array["settings"]["fields"] = $output_fields;
         $output_array["data"] = $input_params;
 
-        $func_array["function"]["name"] = "get_my_list";
+        $func_array["function"]["name"] = "get_my_data_list";
         $func_array["function"]["single_keys"] = $this->single_keys;
         $func_array["function"]["multiple_keys"] = $this->multiple_keys;
 

@@ -185,6 +185,19 @@ $config["my_list"] = array(
 );
 
 
+$config["my_list_data"] = array(
+    "title" => "User My Lists Data",
+    "folder" => "basic_appineers_master",
+    "method" => $_SERVER['REQUEST_METHOD'],
+    "params" => array(),
+    "token" => "",
+    "payload" => array(
+    ),
+    "target" => ""
+);
+
+
+
 $config["go_ad_free"] = array(
     "title" => "Go Ad Free",
     "folder" => "basic_appineers_master",
