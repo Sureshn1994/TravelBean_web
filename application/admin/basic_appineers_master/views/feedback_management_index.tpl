@@ -123,10 +123,7 @@
         "name": "u_first_name",
         "label": "<%$list_config['u_first_name']['label_lang']%>"
     },
-    {
-        "name": "u_user_name",
-        "label": "<%$list_config['u_user_name']['label_lang']%>"
-    },
+   
     {
         "name": "uq_feedback",
         "label": "<%$list_config['uq_feedback']['label_lang']%>"
@@ -206,48 +203,7 @@
         "formatter": formatAdminModuleCustomEditLink,
         "unformat": unformatAdminModuleCustomEditLink
     },
-    {
-        "name": "u_user_name",
-        "index": "u_user_name",
-        "label": "<%$list_config['u_user_name']['label_lang']%>",
-        "labelClass": "header-align-left",
-        "resizable": true,
-        "width": "<%$list_config['u_user_name']['width']%>",
-        "search": <%if $list_config['u_user_name']['search'] eq 'No' %>false<%else%>true<%/if%>,
-        "export": <%if $list_config['u_user_name']['export'] eq 'No' %>false<%else%>true<%/if%>,
-        "sortable": <%if $list_config['u_user_name']['sortable'] eq 'No' %>false<%else%>true<%/if%>,
-        "hidden": <%if $list_config['u_user_name']['hidden'] eq 'Yes' %>true<%else%>false<%/if%>,
-        "hideme": <%if $list_config['u_user_name']['hideme'] eq 'Yes' %>true<%else%>false<%/if%>,
-        "addable": <%if $list_config['u_user_name']['addable'] eq 'Yes' %>true<%else%>false<%/if%>,
-        "editable": <%if $list_config['u_user_name']['editable'] eq 'Yes' %>true<%else%>false<%/if%>,
-        "align": "left",
-        "edittype": "select",
-        "editrules": {
-            "infoArr": []
-        },
-        "searchoptions": {
-            "attr": {
-                "aria-grid-id": el_tpl_settings.main_grid_id,
-                "aria-module-name": "feedback_management",
-                "aria-unique-name": null,
-                "autocomplete": "off"
-            },
-            "sopt": strSearchOpts,
-            "searchhidden": <%if $list_config['u_user_name']['search'] eq 'Yes' %>true<%else%>false<%/if%>
-        },
-        "editoptions": {
-            "aria-grid-id": el_tpl_settings.main_grid_id,
-            "aria-module-name": "feedback_management",
-            "aria-unique-name": null,
-            "placeholder": null,
-            "class": "inline-edit-row "
-        },
-        "ctrl_type": "textbox",
-        "default_value": "<%$list_config['u_user_name']['default']%>",
-        "filterSopt": "bw",
-        "formatter": formatAdminModuleCustomEditLink,
-        "unformat": unformatAdminModuleCustomEditLink
-    },
+   
     {
         "name": "uq_feedback",
         "index": "uq_feedback",

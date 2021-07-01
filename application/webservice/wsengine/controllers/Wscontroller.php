@@ -101,7 +101,7 @@ class Wscontroller extends Cit_Controller
             $msg = "App maintenance mode";
         }
 
-        $api_allowed_without_access_token = array('social_login','user_login_phone','user_login_email','send_verification_link','check_unique_user','social_sign_up','user_sign_up_phone','user_sign_up_email','user_email_confirmation','send_sms','reset_password_confirmation','reset_password_phone','get_template_message','forgot_password_phone','reset_password','forgot_password','states_list','get_config_paramaters');
+        $api_allowed_without_access_token = array('social_login','user_login_phone','user_login_email','send_verification_link','check_unique_user','social_sign_up','user_sign_up_phone','user_sign_up_email','user_email_confirmation','static_pages','send_sms','reset_password_confirmation','reset_password_phone','get_template_message','forgot_password_phone','reset_password','forgot_password','states_list','get_config_paramaters');
 
             //JWT token verification
             $auth_header = $this->input->get_request_header('AUTHTOKEN');

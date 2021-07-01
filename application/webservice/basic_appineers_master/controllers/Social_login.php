@@ -298,6 +298,13 @@ class Social_login extends Cit_Controller
         try
         {
 
+             $current_timezone = date_default_timezone_get();
+                // convert the current timezone to UTC
+                 date_default_timezone_set('UTC');
+                $current_date = date("Y-m-d H:i:s");
+                // Again coverting into local timezone
+                date_default_timezone_set($current_timezone);
+
             $auth_token = isset($input_params["auth_token"]) ? $input_params["auth_token"] : "";
             $where_clause = isset($input_params["where_clause"]) ? $input_params["where_clause"] : "";
             $this->block_result = $this->users_model->get_user_login_details_v1_v1($auth_token, $where_clause);
@@ -311,6 +318,39 @@ class Social_login extends Cit_Controller
                 $i = 0;
                 foreach ($result_arr as $data_key => $data_arr)
                 {
+
+
+                $subscribeData = $this->get_subscription_details($data_arr["u_user_id"]);
+
+                   $subscription = array();
+                   $subscription_plans = array();
+                    foreach ($subscribeData as $key => $value) 
+                    {
+                       if(in_array($value['product_id'], $subscription_plans))
+                        {
+                            continue;
+                        }
+
+                        $expire_date = $value['dLatestExpiryDate']; 
+
+                        unset($value['dLatestExpiryDate']);
+                        //latest expire date is greater than current date
+
+                        if(strtotime($expire_date) > strtotime($current_date) || $expire_date == "0000-00-00 00:00:00")
+                        {
+                            $value['subscription_status'] = 1;
+
+                        }else
+                        {
+                            $value['subscription_status'] = 0;
+                        }
+
+                        $subscription[] = $value; 
+
+                        $subscription_plans[] = $value['product_id']; 
+                    }
+
+                     $result_arr[$data_key]["subscription"] = $subscription;
 
                     $data = $data_arr["u_profile_image"];
                     $image_arr = array();
@@ -341,6 +381,18 @@ class Social_login extends Cit_Controller
         $input_params = $this->wsresponse->assignSingleRecord($input_params, $this->block_result["data"]);
 
         return $input_params;
+    }
+
+     public function get_subscription_details($user_id)
+    {
+
+
+
+      $arrShareResult = array();
+      $arrShareResult = $this->users_model->get_subscription_details($user_id);
+       $result_arr =  $arrShareResult["data"];
+      $arrShareResult['data'] = $result_arr;
+      return $arrShareResult['data'] ;
     }
 
     /**
@@ -545,6 +597,7 @@ class Social_login extends Cit_Controller
             'u_terms_conditions_version',
             'u_privacy_policy_version',
             'u_log_status_updated',
+              'subscription',
         );
         $output_keys = array(
             'get_user_login_details_v1_v1',
@@ -584,6 +637,7 @@ class Social_login extends Cit_Controller
             "u_terms_conditions_version" => "terms_conditions_version",
             "u_privacy_policy_version" => "privacy_policy_version",
             "u_log_status_updated" => "log_status_updated",
+             "subscription" => "subscription",
         );
 
         $output_array["settings"] = $setting_fields;

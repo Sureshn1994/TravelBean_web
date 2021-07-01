@@ -1,0 +1,137 @@
+.header-transparrent 
+{
+    position: relative;
+}
+
+
+.et_pb_text_6 {
+    font-weight: 300;
+    font-size: 30px;
+    line-height: 1.3em;
+    padding-top: 61px!important;
+}
+
+.app-img {
+    width: 100%;;
+}
+.best-features-area .single-features .features-icon span
+{
+    background-image: -webkit-linear-gradient(90deg, #FFB000 0%, #FFB000 100%);
+
+}
+.sticky-bar
+{
+    background: #D10000;
+}
+.btn {
+    background: #FFB000;
+    }
+.slider-area .hero__caption .slider-btns a.video-btn {
+    background: #9F2828;
+}
+
+.available-app-area {
+    background-image: -webkit-linear-gradient(90deg, #FFB000  50%, #FD3539 100%);
+
+    }
+.header-sticky.sticky-bar.sticky .main-menu ul>li>a {
+    color: #fff;
+}
+.btn-group-vertical>.btn-group:after, .btn-group-vertical>.btn-group:before, .btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before, .container-fluid:after, .container-fluid:before, .container:after, .container:before, .dl-horizontal dd:after, .dl-horizontal dd:before, .form-horizontal .form-group:after, .form-horizontal .form-group:before, .modal-footer:after, .modal-footer:before, .modal-header:after, .modal-header:before, .nav:after, .nav:before, .navbar-collapse:after, .navbar-collapse:before, .navbar-header:after, .navbar-header:before, .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after, .panel-body:before, .row:after, .row:before
+{
+    content: unset;
+}
+.nav>li>a:focus, .nav>li>a:hover {
+    background-color: unset;
+}
+.btn:hover::before {
+    background: #9F2828;
+}
+.btn::before {
+    background: #9F2828;
+    }
+    #scrollUp {
+    background: #FFB000;
+}
+
+.main-header .main-menu ul li>a::before
+{
+   
+    background: #FD3539;
+}
+.logo {
+    width: 100%;
+}
+@media (max-width: 768px) {
+  .back-to-top {
+    bottom: 15px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .cta-section h2 {
+    font-size: 2rem;
+  }
+}
+
+
+@media only screen and (max-width: 600px) and (min-width: 360px)  
+{
+    .section-tittle h2 {
+    margin-bottom: 33px;
+}
+.custom-about
+{
+    display: block !important;
+    float: unset;
+}
+.slider-area .hero__img img {
+    margin: 0 auto;
+    position: unset;
+    right: unset;
+}
+.slicknav_menu .slicknav_icon-bar {
+    background-color: #9F2828 !important;
+}
+.logo
+{
+    width:50%;
+}
+.custom-dev
+{
+    padding: 0px 15px;
+}
+.applic-apps .owl-carousel .owl-item img {
+    display: block;
+    width: 90%;
+}
+.video-section-text
+{
+    display:none;
+}
+.app-btn
+{
+        display: inline-flex;
+}
+.available-app-area .app-caption .app-btn .app-btn1
+{
+    padding-top: 10px;
+}
+.white-top
+{
+  display: none;
+}
+.sticky-wrapper
+{
+  background-color: #fff;
+}
+.burger:before, .burger span, .burger:after
+{
+  background: #000;
+}
+.custom-li
+{
+  display: block !important;
+}
+
+}

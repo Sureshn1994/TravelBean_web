@@ -72,7 +72,6 @@ class Feedback_management_model extends CI_Model
         $this->physical_data_remove = "Yes";
         $this->grid_fields = array(
             "u_first_name",
-            "u_user_name",
             "uq_feedback",
             "uq_note",
             "uq_added_at",
@@ -386,7 +385,7 @@ class Feedback_management_model extends CI_Model
                 $this->db->select($this->table_alias.".".$this->primary_key." AS ".$this->primary_alias);
             }
             $this->db->select("concat(u.vFirstName,\" \",u.vLastName) AS u_first_name");
-            $this->db->select("u.vUserName AS u_user_name");
+           // $this->db->select("u.vUserName AS u_user_name");
             $this->db->select("uq.tFeedback AS uq_feedback");
             $this->db->select("uq.tNote AS uq_note");
             $this->db->select("uq.dtAddedAt AS uq_added_at");
@@ -554,7 +553,7 @@ class Feedback_management_model extends CI_Model
             $this->db->select($this->table_alias.".".$this->primary_key." AS ".$this->primary_alias);
         }
         $this->db->select("concat(u.vFirstName,\" \",u.vLastName) AS u_first_name");
-        $this->db->select("u.vUserName AS u_user_name");
+        //$this->db->select("u.vUserName AS u_user_name");
         $this->db->select("uq.tFeedback AS uq_feedback");
         $this->db->select("uq.tNote AS uq_note");
         $this->db->select("uq.dtAddedAt AS uq_added_at");
@@ -669,7 +668,7 @@ class Feedback_management_model extends CI_Model
             $this->db->select($this->table_alias.".".$this->primary_key." AS ".$this->primary_alias);
         }
         $this->db->select("concat(u.vFirstName,\" \",u.vLastName) AS u_first_name");
-        $this->db->select("u.vUserName AS u_user_name");
+        //$this->db->select("u.vUserName AS u_user_name");
         $this->db->select("uq.tFeedback AS uq_feedback");
         $this->db->select("uq.tNote AS uq_note");
         $this->db->select("uq.dtAddedAt AS uq_added_at");
@@ -761,32 +760,7 @@ class Feedback_management_model extends CI_Model
                 "custom_link" => "Yes",
                 "php_func" => "controller::replaceNull",
             ),
-            "u_user_name" => array(
-                "name" => "u_user_name",
-                "table_name" => "users",
-                "table_alias" => "u",
-                "field_name" => "vUserName",
-                "source_field" => "",
-                "display_query" => "u.vUserName",
-                "entry_type" => "Table",
-                "data_type" => "",
-                "show_in" => "Both",
-                "type" => "textbox",
-                "align" => "left",
-                "label" => "Username",
-                "lang_code" => "FEEDBACK_MANAGEMENT_USERNAME",
-                "label_lang" => $this->lang->line('FEEDBACK_MANAGEMENT_USERNAME'),
-                "width" => 50,
-                "search" => "Yes",
-                "export" => "Yes",
-                "sortable" => "Yes",
-                "addable" => "No",
-                "editable" => "No",
-                "viewedit" => "No",
-                "edit_link" => "Yes",
-                "custom_link" => "Yes",
-                "php_func" => "controller::replaceNull",
-            ),
+           
             "uq_feedback" => array(
                 "name" => "uq_feedback",
                 "table_name" => "user_query",

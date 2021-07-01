@@ -130,26 +130,7 @@
 </div>
 <div class="error-msg-form "><label class='error' id='u_last_nameErr'></label></div>
 </div>
-<div class="form-row row-fluid " id="cc_sh_u_user_name">
-<label class="form-label span3 ">
-<%$form_config['u_user_name']['label_lang']%>
-</label> 
-<div class="form-right-div  <%if $mode eq 'Update'%>frm-elements-div<%/if%> ">
-<%if $mode eq "Update"%>
-<input type="hidden" class="ignore-valid" name="u_user_name" id="u_user_name" value="<%$data['u_user_name']|@htmlentities%>" />
-<span class="frm-data-label">
-    <strong>
-        <%if $data['u_user_name'] neq ""%>
-            <%$data['u_user_name']%>
-        <%else%>
-        <%/if%>
-    </strong></span>
-<%else%>
-    <input type="text" placeholder="" value="<%$data['u_user_name']|@htmlentities%>" name="u_user_name" id="u_user_name" title="<%$this->lang->line('USERS_MANAGEMENT_USERNAME')%>"  data-ctrl-type='textbox'  class='frm-size-medium'  />
-<%/if%>
-</div>
-<div class="error-msg-form "><label class='error' id='u_user_nameErr'></label></div>
-</div>
+
 <div class="form-row row-fluid " id="cc_sh_u_email">
 <label class="form-label span3 ">
 <%$form_config['u_email']['label_lang']%>
@@ -170,48 +151,8 @@
 </div>
 <div class="error-msg-form "><label class='error' id='u_emailErr'></label></div>
 </div>
-<div class="form-row row-fluid " id="cc_sh_u_mobile_no">
-<label class="form-label span3 ">
-    <%$form_config['u_mobile_no']['label_lang']%>
-</label> 
-<div class="form-right-div  <%if $mode eq 'Update'%>frm-elements-div<%/if%> ">
-    <%if $mode eq "Update"%>
-        <input type="hidden" class="ignore-valid" name="u_mobile_no" id="u_mobile_no" value="<%$data['u_mobile_no']|@htmlentities%>" />
-        <span class="frm-data-label">
-            <strong>
-                <%if $data['u_mobile_no'] neq ""%>
-                    <%$data['u_mobile_no']%>
-                <%else%>
-                <%/if%>
-            </strong></span>
-        <%else%>
-            <input type="text" placeholder="" value="<%$data['u_mobile_no']|@htmlentities%>" name="u_mobile_no" id="u_mobile_no" title="<%$this->lang->line('USERS_MANAGEMENT_MOBILE_NUMBER')%>"  data-ctrl-type='textbox'  class='frm-size-medium'  />
-        <%/if%>
-    </div>
-    <div class="error-msg-form "><label class='error' id='u_mobile_noErr'></label></div>
-</div>
-<div class="form-row row-fluid " id="cc_sh_u_dob">
-    <label class="form-label span3 ">
-        <%$form_config['u_dob']['label_lang']%>
-    </label> 
-    <div class="form-right-div  <%if $mode eq 'Update'%>frm-elements-div<%else%>input-append text-append-prepend<%/if%> ">
-        <%if $mode eq "Update"%>
-            <input type="hidden" name="u_dob" id="u_dob" value="<%$this->general->dateSystemFormat($data['u_dob'])%>" class="ignore-valid view-label-only"  data-ctrl-type='date'  class='frm-datepicker ctrl-append-prepend frm-size-medium'  aria-date-format='<%$this->general->getAdminJSFormats('date', 'dateFormat')%>'  aria-format-type='date' />
-            <%assign var="display_date" value=$this->general->dateSystemFormat($data['u_dob'])%>
-            <span class="frm-data-label">
-                <strong>
-                    <%if $display_date neq ""%>
-                        <%$display_date%>
-                    <%else%>
-                    <%/if%>
-                </strong></span>
-            <%else%>
-                <input type="text" value="<%$this->general->dateSystemFormat($data['u_dob'])%>" placeholder="" name="u_dob" id="u_dob" title="<%$this->lang->line('USERS_MANAGEMENT_DOB')%>"  data-ctrl-type='date'  class='frm-datepicker ctrl-append-prepend frm-size-medium'  aria-date-format='<%$this->general->getAdminJSFormats('date', 'dateFormat')%>'  aria-format-type='date'  />
-                <span class='add-on text-addon date-append-class icomoon-icon-calendar'></span>
-            <%/if%>
-        </div>
-        <div class="error-msg-form "><label class='error' id='u_dobErr'></label></div>
-    </div>
+
+
     <div class="form-row row-fluid " id="cc_sh_u_address">
         <label class="form-label span3 ">
             <%$form_config['u_address']['label_lang']%> <em>*</em> 
@@ -330,26 +271,29 @@
                 </div>
                 <div class="error-msg-form "><label class='error' id='u_state_idErr'></label></div>
             </div> -->
-            <div class="form-row row-fluid " id="cc_sh_u_zip_code">
+            
+
+                 <div class="form-row row-fluid " id="cc_sh_u_one_time_transaction">
                 <label class="form-label span3 ">
-                    <%$form_config['u_zip_code']['label_lang']%>
+                    <%$form_config['u_one_time_transaction']['label_lang']%>
                 </label> 
                 <div class="form-right-div  <%if $mode eq 'Update'%>frm-elements-div<%/if%> ">
                     <%if $mode eq "Update"%>
-                        <input type="hidden" class="ignore-valid" name="u_zip_code" id="u_zip_code" value="<%$data['u_zip_code']|@htmlentities%>" />
+                        <input type="hidden" class="ignore-valid" name="u_one_time_transaction" id="u_one_time_transaction" value="<%$data['u_one_time_transaction']|@htmlentities%>" />
                         <span class="frm-data-label">
                             <strong>
-                                <%if $data['u_zip_code'] neq ""%>
-                                    <%$data['u_zip_code']%>
+                                <%if $data['u_one_time_transaction'] neq ""%>
+                                    <%$data['u_one_time_transaction']%>
                                 <%else%>
                                 <%/if%>
                             </strong></span>
                         <%else%>
-                            <input type="text" placeholder="" value="<%$data['u_zip_code']|@htmlentities%>" name="u_zip_code" id="u_zip_code" title="<%$this->lang->line('USERS_MANAGEMENT_ZIP_CODE')%>"  data-ctrl-type='textbox'  class='frm-size-medium'  />
+                            <input type="text" placeholder="" value="<%$data['u_one_time_transaction']|@htmlentities%>" name="u_one_time_transaction" id="u_one_time_transaction" title="<%$this->lang->line('USERS_MANAGEMENT_ZIP_CODE')%>"  data-ctrl-type='textbox'  class='frm-size-medium'  />
                         <%/if%>
                     </div>
-                    <div class="error-msg-form "><label class='error' id='u_zip_codeErr'></label></div>
+                    <div class="error-msg-form "><label class='error' id='u_one_time_transactionErr'></label></div>
                 </div>
+
                 <div class="form-row row-fluid " id="cc_sh_u_terms_conditions_version">
                     <label class="form-label span3 ">
                         <%$form_config['u_terms_conditions_version']['label_lang']%>

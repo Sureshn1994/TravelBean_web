@@ -151,7 +151,7 @@ class Get_config_paramaters extends Cit_Controller
             'privacy_policy_updated',
             'terms_conditions_updated',
             'log_status_updated',
-	    'ios_app_id',   
+            'ios_app_id',   
             'ios_banner_id',    
             'ios_interstitial_id',  
             'ios_native_id',    
@@ -160,7 +160,17 @@ class Get_config_paramaters extends Cit_Controller
             'android_banner_id',    
             'android_interstitial_id',  
             'android_native_id',    
-            'android_rewarded_id'
+            'android_rewarded_id',
+            'project_debug_level',
+            'ios_mopub_banner_id',
+            'ios_mopub_interstitial_id',
+            'android_mopub_banner_id',
+            'android_mopub_interstitial_id',
+            'subscription',
+            'vatlayer_api_key',
+            'ziptax_api_key',
+            'barcode_lookup_api_key',
+            'fixer_api_key',
         );
         $output_keys = array(
             'get_config_params',

@@ -72,10 +72,52 @@ h1.exp-msg { width: 100%; display: inline-block; text-align: center; font-size: 
 .lock-img img { width: 100%; margin: 30px 0; }
 .form-group.nw-pass input { height: 45px; border: 2px solid #337ab7; border-radius: 35px; margin-bottom: 40px; position: relative; }
 .form-group.cnf-pass input { height: 45px; border: 2px solid #337ab7; border-radius: 35px; margin-bottom: 40px; position: relative; }
-.text-center.sub-btn button { height: 45px; background: #337ab7; color: #fff; width: 100px; font-size: 18px; border-radius: 30px;font-family: 'hindsemibold';}
-.text-center.sub-btn button:hover { background:#fff; border:2px solid #337ab7; color:#337ab7;}
+/*.text-center.sub-btn button { height: 45px; background: #337ab7; color: #fff; width: 100px; font-size: 18px; border-radius: 30px;font-family: 'hindsemibold';}
+.text-center.sub-btn button:hover { background:#fff; border:2px solid #337ab7; color:#337ab7;}*/
+
+.text-center.sub-btn button { height: 45px; background: #337ab7; color: #fff; width: 100%; font-size: 18px; border-radius: 30px;font-family: 'hindsemibold';}
+.text-center.sub-btn button:hover { height: 45px; background:#fff; width: 100%; font-size: 18px; border-radius: 30px;font-family: 'hindsemibold'; color:#337ab7;}
+
+
+
 div#confirm_pass_error { color: #c50f0f; position: absolute; top: 131px; left: 30px; font-size:13px;font-family: 'hindsemibold'; }
 div#new_pass_error { color: #c50f0f; position: absolute; top: 46px; left: 30px;font-size:13px;font-family: 'hindsemibold'; }
 p.lead.ex-pass { font-size: 20px; color: #f4704e; font-family: 'hindbold'; }
 .ex-pswr img { margin-bottom:0;}
 .btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus { outline:none;}
+
+
+#et-info a
+{
+    color: #fff;
+}
+.nav>li {
+    position: relative;
+    display: inline-flex;
+}
+.white-top {
+    background: #989898;
+    font-size: 13px;
+      min-height: 60px;
+}
+#et-info a {
+    color: #fff;
+}
+.nav>li>a {
+    color: #fff;
+}
+.white-bottom 
+{
+	background: #989898;
+}
+.copyright {
+	
+    font-size: 13px;
+    padding: 24px;
+    color: #fff;
+}
+.panel-primary>.panel-heading {
+    color: #fff;
+    background-color: #0000008c;
+    border-color: #337ab7;
+}

@@ -961,14 +961,17 @@ class Users_management extends Cit_Controller
             $u_profile_image = $params_arr["u_profile_image"];
             $u_first_name = $params_arr["u_first_name"];
             $u_last_name = $params_arr["u_last_name"];
-            $u_user_name = $params_arr["u_user_name"];
+            $u_go_ad_free = $params_arr["u_go_ad_free"];
+           
+
+
             $u_email = $params_arr["u_email"];
-            $u_mobile_no = $params_arr["u_mobile_no"];
-            $u_dob = $params_arr["u_dob"];
+         
+          
             $u_address = $params_arr["u_address"];
             $u_city = $params_arr["u_city"];
             $u_state_name = $params_arr["u_state_name"];
-            $u_zip_code = $params_arr["u_zip_code"];
+        
             $u_terms_conditions_version = $params_arr["u_terms_conditions_version"];
             $u_privacy_policy_version = $params_arr["u_privacy_policy_version"];
             $u_deleted_at = $params_arr["u_deleted_at"];
@@ -999,9 +1002,10 @@ class Users_management extends Cit_Controller
             $data["vProfileImage"] = $u_profile_image;
             $data["vFirstName"] = $u_first_name;
             $data["vLastName"] = $u_last_name;
-            $data["vUserName"] = $u_user_name;
+            $data["eOneTimeTransaction"] = $u_go_ad_free;
+
             $data["vEmail"] = $u_email;
-            $data["vMobileNo"] = $u_mobile_no;
+      
             $data["dDob"] = $this->filter->formatActionData($u_dob, $form_config["u_dob"]);
             $data["tAddress"] = $u_address;
             $data["vCity"] = $u_city;
@@ -1015,7 +1019,7 @@ class Users_management extends Cit_Controller
             $data["dLatitude"] = $u_latitude;
             $data["dLongitude"] = $u_longitude;
             $data["ePushNotify"] = $u_push_notify;
-            $data["tOneTimeTransaction"] = $u_one_time_transaction;
+            $data["eOneTimeTransaction"] = $u_one_time_transaction;
             if($u_status == "Inactive"){
                $data["vAccessToken"] = $u_access_token; 
             }
@@ -1036,14 +1040,14 @@ class Users_management extends Cit_Controller
             $save_data_arr["u_profile_image"] = $data["vProfileImage"];
             $save_data_arr["u_first_name"] = $data["vFirstName"];
             $save_data_arr["u_last_name"] = $data["vLastName"];
-            $save_data_arr["u_user_name"] = $data["vUserName"];
+            $save_data_arr["u_go_ad_free"] = $data["eOneTimeTransaction"];
             $save_data_arr["u_email"] = $data["vEmail"];
-            $save_data_arr["u_mobile_no"] = $data["vMobileNo"];
-            $save_data_arr["u_dob"] = $data["dDob"];
+      
+        
             $save_data_arr["u_address"] = $data["tAddress"];
             $save_data_arr["u_city"] = $data["vCity"];
             $save_data_arr["u_state_name"] = $data["vStateName"];
-            $save_data_arr["u_zip_code"] = $data["vZipCode"];
+        
             $save_data_arr["u_terms_conditions_version"] = $data["vTermsConditionsVersion"];
             $save_data_arr["u_privacy_policy_version"] = $data["vPrivacyPolicyVersion"];
             $save_data_arr["u_deleted_at"] = $data["dtDeletedAt"];
@@ -1052,7 +1056,7 @@ class Users_management extends Cit_Controller
             $save_data_arr["u_latitude"] = $data["dLatitude"];
             $save_data_arr["u_longitude"] = $data["dLongitude"];
             $save_data_arr["u_push_notify"] = $data["ePushNotify"];
-            $save_data_arr["u_one_time_transaction"] = $data["tOneTimeTransaction"];
+            $save_data_arr["u_one_time_transaction"] = $data["eOneTimeTransaction"];
             if($u_status == "Inactive"){
                $save_data_arr["u_access_token"] = $data["vAccessToken"]; 
             }

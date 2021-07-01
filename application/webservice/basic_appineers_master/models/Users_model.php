@@ -222,6 +222,69 @@ class Users_model extends CI_Model
         return $return_arr;
     }
 
+ /**
+     * add_transaction_data method is used to execute database queries for Go Ad Free API.
+     * @created priyanka chillakuru | 26.09.2019
+     * @modified priyanka chillakuru | 26.09.2019
+     * @param array $params_arr params_arr array to process query block.
+     * @param array $where_arr where_arr are used to process where condition(s).
+     * @return array $return_arr returns response of query block.
+     */
+    public function add_transaction_data($params_arr = array(), $where_arr = array())
+    {
+        try
+        {
+               $result_arr = array();
+            if (isset($params_arr["user_id"]))
+            {
+                $this->db->set("iUserId", $params_arr["user_id"]);
+            }
+
+            if (isset($params_arr["original_transaction_id"]))
+            {
+                $this->db->set("vOrginalTransactionId", $params_arr["original_transaction_id"]);
+            }
+            $this->db->set("eDeviceType", $params_arr["receipt_type"]);
+            if (isset($params_arr["receipt_data_v1"]))
+            {
+                $this->db->set("lReceiptData", $params_arr["receipt_data_v1"]);
+            }
+             if (isset($params_arr["expiry_date_v1"]))
+            {
+                $this->db->set("dLatestExpiryDate", $params_arr["expiry_date_v1"]);
+            }
+            if (isset($params_arr["product_id"]))
+            {
+                $this->db->set("vProductId", $params_arr["product_id"]);
+            }
+
+           // $this->db->set($this->db->protect("dtAddedAt"), $params_arr["_dtaddedat"], FALSE);
+            $this->db->insert("user_subscription");
+            $insert_id = $this->db->insert_id();
+            if (!$insert_id)
+            {
+                throw new Exception("Failure in insertion.");
+            }
+            $result_param = "insert_id";
+            $result_arr[0][$result_param] = $insert_id;
+            $success = 1;
+        }
+        catch(Exception $e)
+        {
+            $success = 0;
+            $message = $e->getMessage();
+        }
+        $this->db->flush_cache();
+        $this->db->_reset_all();
+        //echo $this->db->last_query();
+        $return_arr["success"] = $success;
+        $return_arr["message"] = $message;
+        $return_arr["data"] = $result_arr;
+        return $return_arr;
+    }
+
+    
+
     /**
      * check_unique_mobile_number method is used to execute database queries for Change Mobile Number API.
      * @created CIT Dev Team
@@ -307,6 +370,39 @@ class Users_model extends CI_Model
         $this->db->flush_cache();
         $this->db->_reset_all();
         //echo $this->db->last_query();
+        $return_arr["success"] = $success;
+        $return_arr["message"] = $message;
+        $return_arr["data"] = $result_arr;
+        return $return_arr;
+    }
+
+     public function get_subscription_details($user_id){
+        
+        try
+        {
+
+          $this->db->select('vProductId as product_id,dLatestExpiryDate,"" as subscription_status, lReceiptData as purchase_token'); //vOrginalTransactionId
+            $this->db->from('user_subscription');
+            $this->db->where('iUserId',$user_id);
+            $this->db->order_by('dLatestExpiryDate','DESC');
+             $result_obj = $this->db->get();
+             //echo $this->db->last_query();
+             //exit;
+            $result_arr = is_object($result_obj) ? $result_obj->result_array() : array();
+            if (!is_array($result_arr) || count($result_arr) == 0)
+            {
+                throw new Exception('No records found.');
+            }
+            $success = 1;
+            }
+        catch(Exception $e)
+        {
+            $success = 0;
+            $message = $e->getMessage();
+        }
+
+        $this->db->_reset_all();
+        //echo $this->db->last_query();exit;
         $return_arr["success"] = $success;
         $return_arr["message"] = $message;
         $return_arr["data"] = $result_arr;
@@ -1883,6 +1979,11 @@ class Users_model extends CI_Model
             if (isset($params_arr["user_profile"]) && !empty($params_arr["user_profile"]))
             {
                 $this->db->set("vProfileImage", $params_arr["user_profile"]);
+            }
+
+            if (isset($params_arr["delete_user_profile"]) && !empty($params_arr["delete_user_profile"]))
+            {
+                $this->db->set("vProfileImage", " ");
             }
             if (isset($params_arr["dob"]))
             {

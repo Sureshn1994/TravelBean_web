@@ -51,6 +51,8 @@ class My_list extends Cit_Controller
     }
 
 
+
+
     /**
      * start_services method is used to initiate api execution flow.
      * @created Suresh Nakate | 08.03.2021
@@ -82,6 +84,8 @@ class My_list extends Cit_Controller
              break;
         }
     }
+    
+
 
 
     /**
@@ -91,7 +95,7 @@ class My_list extends Cit_Controller
      * @param array $request_arr request_arr array is used for api input.
      * @return array $valid_res returns output response of API.
      */
-    public function rules_add_service($request_arr = array())
+    public function rules_add_my_list($request_arr = array())
     {       
         $valid_arr = array(
             "user_id" => array(
@@ -101,6 +105,67 @@ class My_list extends Cit_Controller
                     "message" => "user_id_required",
                 )
             ),
+
+              "list_name" => array(
+                array(
+                    "rule" => "required",
+                    "value" => TRUE,
+                    "message" => "list_name_required",
+                )
+            ),
+
+             "address" => array(
+                array(
+                    "rule" => "required",
+                    "value" => TRUE,
+                    "message" => "address_required",
+                )
+            ),
+
+           
+
+              "to_country_name" => array(
+                array(
+                    "rule" => "required",
+                    "value" => TRUE,
+                    "message" => "to_country_name_required",
+                )
+            ),
+
+
+               "to_currency" => array(
+                array(
+                    "rule" => "required",
+                    "value" => TRUE,
+                    "message" => "to_currency_required",
+                )
+            ),
+
+            "from_country_code" => array(
+                array(
+                    "rule" => "required",
+                    "value" => TRUE,
+                    "message" => "from_country_code_required",
+                )
+            ),
+
+            "from_country_name" => array(
+                array(
+                    "rule" => "required",
+                    "value" => TRUE,
+                    "message" => "from_country_name_required",
+                )
+            ),
+
+            "from_currency" => array(
+                array(
+                    "rule" => "required",
+                    "value" => TRUE,
+                    "message" => "from_currency_required",
+                )
+            ),
+
+
            
             );
         $valid_res = $this->wsresponse->validateInputParams($valid_arr, $request_arr, "add_my_list");
@@ -184,10 +249,12 @@ class My_list extends Cit_Controller
             {
                 $params_arr["address"] = $input_params["address"];
             }
-            if (isset($input_params["to_country_code"]))
+
+            if (isset($input_params["zipcode"]))
             {
-                $params_arr["to_country_code"] = $input_params["to_country_code"];
+                $params_arr["zip_code"] = $input_params["zipcode"];
             }
+            
             if (isset($input_params["to_country_name"]))
             {
                 $params_arr["to_country_name"] = $input_params["to_country_name"];
@@ -469,6 +536,32 @@ class My_list extends Cit_Controller
                 throw new Exception("No records found.");
             }
             $result_arr = $this->block_result["data"];
+
+
+            if (is_array($result_arr) && count($result_arr) > 0)
+            {
+                $i = 0;
+                foreach ($result_arr as $data_key => $data_arr)
+                {
+                    $arrtotalData = $this->get_sum_list_amout($data_arr["list_id"]);
+
+                   if(!empty($arrtotalData)){
+                   foreach ($arrtotalData as $data_key2 => $data_arr2)
+                   {
+                    $result_arr[$data_key]["total_amount"] =(false == empty($data_arr2['total_list_amout']))?$data_arr2['total_list_amout']:"00.00";
+                    $result_arr[$data_key]["total_tax_amount"] =(false == empty($data_arr2['total_tax_amout']))?$data_arr2['total_tax_amout']:"00.00";
+
+                    $result_arr[$data_key]["total_product_amount"] =(false == empty($data_arr2['total_product_amount']))?$data_arr2['total_product_amount']:"00.00";
+                   }
+                  }else{
+                    $result_arr[$data_key]["total_amout"] ="00.00";
+                    $result_arr[$data_key]["total_tax_amout"] ="00.00";
+                    $result_arr[$data_key]["total_product_amount"] ="00.00";
+                  }
+             } 
+
+             $this->block_result["data"] = $result_arr;  
+         }
                    
         }
         catch(Exception $e)
@@ -481,6 +574,18 @@ class My_list extends Cit_Controller
         $input_params = $this->wsresponse->assignSingleRecord($input_params, $this->block_result["data"]);
         //print_r($input_params);exit;
        return $input_params;
+    }
+
+
+    public function get_sum_list_amout($list_id)
+    {
+
+      $arrShareResult = array();
+      $arrShareResult = $this->my_list_model->get_sum_list_amout($list_id);
+
+       $result_arr =  $arrShareResult["data"];
+      $arrShareResult['data'] = $result_arr;
+      return $arrShareResult['data'] ;
     }
 
 
@@ -653,14 +758,18 @@ class My_list extends Cit_Controller
                 "list_id",
                 "list_name",
                 "address",
+                "zipcode",
                 "from_country_code",
                 "from_country_name",
                 "from_currency",
-                "continent",
-                "To_country_code",
-                "To_country_name",
-                "To_country_name",
+                "from_continent",
+                "to_country_name",
+                "to_country_name",
+                "to_currency",
                 "created_date",
+                "total_amount",
+                "total_tax_amount",
+                "total_product_amount",
              );
             $output_keys = array(
                 'get_all_list',

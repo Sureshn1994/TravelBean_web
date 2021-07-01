@@ -62,7 +62,7 @@ class User_sign_up_email extends Cit_Controller
      * @param array $request_arr request_arr array is used for api input.
      * @return array $valid_res returns output response of API.
      */
-    public function rules_user_sign_up_email($request_arr = array())
+     public function rules_user_sign_up_email($request_arr = array())
     {
         $valid_arr = array(
             "first_name" => array(
@@ -89,47 +89,20 @@ class User_sign_up_email extends Cit_Controller
                     "message" => "last_name_maxlength",
                 )
             ),
-            "user_name" => array(
-                array(
-                    "rule" => "regex",
-                    "value" => "/^[0-9a-zA-Z]+$/",
-                    "message" => "user_name_alpha_numeric_without_spaces",
-                ),
-                array(
-                    "rule" => "minlength",
-                    "value" => 5,
-                    "message" => "user_name_minlength",
-                ),
-                array(
-                    "rule" => "maxlength",
-                    "value" => 20,
-                    "message" => "user_name_maxlength",
-                )
-            ),
-            "email" => array(
+        
+           "email" => array(
                 array(
                     "rule" => "email",
                     "value" => TRUE,
                     "message" => "email_email",
-                )
-            ),
-            "mobile_number" => array(
+                ),
                 array(
-                    "rule" => "number",
+                    "rule" => "required",
                     "value" => TRUE,
-                    "message" => "mobile_number_number",
-                ),
-                array(
-                    "rule" => "minlength",
-                    "value" => 10,
-                    "message" => "mobile_number_minlength",
-                ),
-                array(
-                    "rule" => "maxlength",
-                    "value" => 13,
-                    "message" => "mobile_number_maxlength",
+                    "message" => "email_required",
                 )
             ),
+            
             "dob" => array(
                 array(
                     "rule" => "regex",
@@ -147,6 +120,11 @@ class User_sign_up_email extends Cit_Controller
                     "rule" => "maxlength",
                     "value" => 15,
                     "message" => "password_maxlength",
+                ),
+                array(
+                    "rule" => "required",
+                    "value" => TRUE,
+                    "message" => "password_required",
                 )
             ),
             "zipcode" => array(
@@ -187,6 +165,7 @@ class User_sign_up_email extends Cit_Controller
 
         return $valid_res;
     }
+
 
     /**
      * start_user_sign_up_email method is used to initiate api execution flow.

@@ -74,7 +74,7 @@ class Users_management_model extends CI_Model
         $this->primary_key = "iUserId";
         $this->primary_alias = "u_user_id";
         $this->physical_data_remove = "Yes";
-        $this->grid_fields = array("u_profile_image", "u_first_name", "u_user_name", "u_email", "u_mobile_no", "u_added_at", "u_status", "u_updated_at");
+        $this->grid_fields = array("u_profile_image", "u_first_name", "u_go_ad_free", "u_email", "u_added_at", "u_status", "u_updated_at");
         $this->join_tables = array();
         $this->extra_cond = "";
         $this->groupby_cond = array();
@@ -289,9 +289,9 @@ class Users_management_model extends CI_Model
             }
             $this->db->select("u.vProfileImage AS u_profile_image");
         $this->db->select("concat(u.vFirstName,\"\",u.vLastName) AS u_first_name");
-        $this->db->select("u.vUserName AS u_user_name");
+        $this->db->select("u.eOneTimeTransaction AS u_go_ad_free");
         $this->db->select("u.vEmail AS u_email");
-        $this->db->select("u.vMobileNo AS u_mobile_no");
+       
         $this->db->select("u.dtAddedAt AS u_added_at");
         $this->db->select("u.eStatus AS u_status");
         $this->db->select("u.dtUpdatedAt AS u_updated_at");
@@ -302,14 +302,13 @@ class Users_management_model extends CI_Model
             $this->db->select("u.vProfileImage AS u_profile_image");
             $this->db->select("u.vFirstName AS u_first_name");
             $this->db->select("u.vLastName AS u_last_name");
-            $this->db->select("u.vUserName AS u_user_name");
+           
             $this->db->select("u.vEmail AS u_email");
-            $this->db->select("u.vMobileNo AS u_mobile_no");
-            $this->db->select("u.dDob AS u_dob");
-            $this->db->select("u.tAddress AS u_address");
+          
+           $this->db->select("u.tAddress AS u_address");
             $this->db->select("u.vCity AS u_city");
             $this->db->select("u.vStateName AS u_state_name");
-            $this->db->select("u.vZipCode AS u_zip_code");
+            
             $this->db->select("u.vTermsConditionsVersion AS u_terms_conditions_version");
             $this->db->select("u.vPrivacyPolicyVersion AS u_privacy_policy_version");
             $this->db->select("u.dtDeletedAt AS u_deleted_at");
@@ -318,7 +317,7 @@ class Users_management_model extends CI_Model
             $this->db->select("u.dLatitude AS u_latitude");
             $this->db->select("u.dLongitude AS u_longitude");
             $this->db->select("u.ePushNotify AS u_push_notify");
-            $this->db->select("u.tOneTimeTransaction AS u_one_time_transaction");
+           // $this->db->select("u.tOneTimeTransaction AS u_one_time_transaction");
             $this->db->select("u.vAccessToken AS u_access_token");
             $this->db->select("u.vResetPasswordCode AS u_reset_password_code");
             $this->db->select("u.vEmailVerificationCode AS u_email_verification_code");
@@ -456,9 +455,9 @@ class Users_management_model extends CI_Model
         }
         $this->db->select("u.vProfileImage AS u_profile_image");
         $this->db->select("concat(u.vFirstName,\"\",u.vLastName) AS u_first_name");
-        $this->db->select("u.vUserName AS u_user_name");
+        $this->db->select("u.eOneTimeTransaction AS u_go_ad_free");
         $this->db->select("u.vEmail AS u_email");
-        $this->db->select("u.vMobileNo AS u_mobile_no");
+    
         $this->db->select("u.dtAddedAt AS u_added_at");
         $this->db->select("u.eStatus AS u_status");
         $this->db->select("u.dtUpdatedAt AS u_updated_at");
@@ -558,9 +557,9 @@ class Users_management_model extends CI_Model
         }
         $this->db->select("u.vProfileImage AS u_profile_image");
         $this->db->select("concat(u.vFirstName,\"\",u.vLastName) AS u_first_name");
-        $this->db->select("u.vUserName AS u_user_name");
+        $this->db->select("u.eOneTimeTransaction AS u_go_ad_free");
         $this->db->select("u.vEmail AS u_email");
-        $this->db->select("u.vMobileNo AS u_mobile_no");
+    
         $this->db->select("u.dtAddedAt AS u_added_at");
         $this->db->select("u.eStatus AS u_status");
         $this->db->select("u.dtUpdatedAt AS u_updated_at");
@@ -662,7 +661,7 @@ class Users_management_model extends CI_Model
                 "label" => "Full Name",
                 "lang_code" => "USERS_MANAGEMENT_FULL_NAME",
                 "label_lang" => $this->lang->line('USERS_MANAGEMENT_FULL_NAME'),
-                "width" => 50,
+                "width" => 80,
                 "search" => "Yes",
                 "export" => "Yes",
                 "sortable" => "Yes",
@@ -671,22 +670,22 @@ class Users_management_model extends CI_Model
                 "viewedit" => "No",
                 "edit_link" => "Yes"
             ),
-                "u_user_name" => array(
-                "name" => "u_user_name",
+                "u_go_ad_free" => array(
+                "name" => "u_go_ad_free",
                 "table_name" => "users",
                 "table_alias" => "u",
-                "field_name" => "vUserName",
-                "source_field" => "u_user_name",
-                "display_query" => "u.vUserName",
+                "field_name" => "eOneTimeTransaction",
+                "source_field" => "u_go_ad_free",
+                "display_query" => "u.eOneTimeTransaction",
                 "entry_type" => "Table",
                 "data_type" => "varchar",
                 "show_in" => "Both",
                 "type" => "textbox",
                 "align" => "left",
-                "label" => "Username",
-                "lang_code" => "USERS_MANAGEMENT_USERNAME",
-                "label_lang" => $this->lang->line('USERS_MANAGEMENT_USERNAME'),
-                "width" => 50,
+                "label" => "Go Ad free",
+                "lang_code" => "USERS_MANAGEMENT_GO_ADD_FREE",
+                "label_lang" => $this->lang->line('USERS_MANAGEMENT_GO_ADD_FREE'),
+                "width" => 80,
                 "search" => "Yes",
                 "export" => "Yes",
                 "sortable" => "Yes",
@@ -718,29 +717,7 @@ class Users_management_model extends CI_Model
                 "editable" => "No",
                 "viewedit" => "No"
             ),
-                "u_mobile_no" => array(
-                "name" => "u_mobile_no",
-                "table_name" => "users",
-                "table_alias" => "u",
-                "field_name" => "vMobileNo",
-                "source_field" => "u_mobile_no",
-                "display_query" => "u.vMobileNo",
-                "entry_type" => "Table",
-                "data_type" => "varchar",
-                "show_in" => "Both",
-                "type" => "textbox",
-                "align" => "left",
-                "label" => "Mobile Number",
-                "lang_code" => "USERS_MANAGEMENT_MOBILE_NUMBER",
-                "label_lang" => $this->lang->line('USERS_MANAGEMENT_MOBILE_NUMBER'),
-                "width" => 50,
-                "search" => "Yes",
-                "export" => "Yes",
-                "sortable" => "Yes",
-                "addable" => "No",
-                "editable" => "No",
-                "viewedit" => "No"
-            ),
+               
                 "u_added_at" => array(
                 "name" => "u_added_at",
                 "table_name" => "users",
@@ -886,19 +863,7 @@ class Users_management_model extends CI_Model
                 "lang_code" => "USERS_MANAGEMENT_LAST_NAME",
                 "label_lang" => $this->lang->line('USERS_MANAGEMENT_LAST_NAME')
             ),
-                "u_user_name" => array(
-                "name" => "u_user_name",
-                "table_name" => "users",
-                "table_alias" => "u",
-                "field_name" => "vUserName",
-                "entry_type" => "Table",
-                "data_type" => "varchar",
-                "show_input" => "Both",
-                "type" => "textbox",
-                "label" => "Username",
-                "lang_code" => "USERS_MANAGEMENT_USERNAME",
-                "label_lang" => $this->lang->line('USERS_MANAGEMENT_USERNAME')
-            ),
+               
                 "u_email" => array(
                 "name" => "u_email",
                 "table_name" => "users",
@@ -912,33 +877,8 @@ class Users_management_model extends CI_Model
                 "lang_code" => "USERS_MANAGEMENT_EMAIL",
                 "label_lang" => $this->lang->line('USERS_MANAGEMENT_EMAIL')
             ),
-                "u_mobile_no" => array(
-                "name" => "u_mobile_no",
-                "table_name" => "users",
-                "table_alias" => "u",
-                "field_name" => "vMobileNo",
-                "entry_type" => "Table",
-                "data_type" => "varchar",
-                "show_input" => "Both",
-                "type" => "textbox",
-                "label" => "Mobile Number",
-                "lang_code" => "USERS_MANAGEMENT_MOBILE_NUMBER",
-                "label_lang" => $this->lang->line('USERS_MANAGEMENT_MOBILE_NUMBER')
-            ),
-                "u_dob" => array(
-                "name" => "u_dob",
-                "table_name" => "users",
-                "table_alias" => "u",
-                "field_name" => "dDob",
-                "entry_type" => "Table",
-                "data_type" => "date",
-                "show_input" => "Both",
-                "type" => "date",
-                "label" => "Dob",
-                "lang_code" => "USERS_MANAGEMENT_DOB",
-                "label_lang" => $this->lang->line('USERS_MANAGEMENT_DOB'),
-                "format" => $this->general->getAdminPHPFormats('date')
-            ),
+               
+              
                 "u_address" => array(
                 "name" => "u_address",
                 "table_name" => "users",
@@ -978,19 +918,21 @@ class Users_management_model extends CI_Model
                 "lang_code" => "USERS_MANAGEMENT_STATE",
                 "label_lang" => $this->lang->line('USERS_MANAGEMENT_STATE')
             ),
-                "u_zip_code" => array(
-                "name" => "u_zip_code",
+             
+                 "u_one_time_transaction" => array(
+                "name" => "u_one_time_transaction",
                 "table_name" => "users",
                 "table_alias" => "u",
-                "field_name" => "vZipCode",
+                "field_name" => "eOneTimeTransaction",
                 "entry_type" => "Table",
-                "data_type" => "varchar",
+                "data_type" => "enum",
                 "show_input" => "Both",
                 "type" => "textbox",
-                "label" => "Zip Code",
-                "lang_code" => "USERS_MANAGEMENT_ZIP_CODE",
-                "label_lang" => $this->lang->line('USERS_MANAGEMENT_ZIP_CODE')
+                "label" => "Go Ad Free",
+                "lang_code" => "USERS_MANAGEMENT_GO_ADD_FREE",
+                "label_lang" => $this->lang->line('USERS_MANAGEMENT_GO_ADD_FREE')
             ),
+
                 "u_terms_conditions_version" => array(
                 "name" => "u_terms_conditions_version",
                 "table_name" => "users",
@@ -1107,7 +1049,7 @@ class Users_management_model extends CI_Model
                 "data_type" => "text",
                 "show_input" => "Hidden",
                 "type" => "textbox",
-                "label" => "One Time Transaction",
+                "label" => "Go add Free",
                 "lang_code" => "USERS_MANAGEMENT_ONE_TIME_TRANSACTION",
                 "label_lang" => $this->lang->line('USERS_MANAGEMENT_ONE_TIME_TRANSACTION')
             ),

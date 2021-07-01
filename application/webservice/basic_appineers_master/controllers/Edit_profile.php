@@ -60,7 +60,7 @@ class Edit_profile extends Cit_Controller
      * @param array $request_arr request_arr array is used for api input.
      * @return array $valid_res returns output response of API.
      */
-    public function rules_edit_profile($request_arr = array())
+  public function rules_edit_profile($request_arr = array())
     {
         $valid_arr = array(
             "user_id" => array(
@@ -94,52 +94,25 @@ class Edit_profile extends Cit_Controller
                     "message" => "last_name_maxlength",
                 )
             ),
-            "zipcode" => array(
+
+             "address" => array(
                 array(
-                    "rule" => "minlength",
-                    "value" => 5,
-                    "message" => "zipcode_minlength",
-                ),
-                array(
-                    "rule" => "maxlength",
-                    "value" => 10,
-                    "message" => "zipcode_maxlength",
-                )
-            ),
-            "user_name" => array(
-                array(
-                    "rule" => "regex",
-                    "value" => "/^[0-9a-zA-Z]+$/",
-                    "message" => "user_name_alpha_numeric_without_spaces",
-                ),
-                array(
-                    "rule" => "minlength",
-                    "value" => 5,
-                    "message" => "user_name_minlength",
-                ),
-                array(
-                    "rule" => "maxlength",
-                    "value" => 20,
-                    "message" => "user_name_maxlength",
-                )
-            ),
-            "mobile_number" => array(
-                array(
-                    "rule" => "number",
+                    "rule" => "required",
                     "value" => TRUE,
-                    "message" => "mobile_number_number",
-                ),
-                array(
-                    "rule" => "minlength",
-                    "value" => 10,
-                    "message" => "mobile_number_minlength",
-                ),
-                array(
-                    "rule" => "maxlength",
-                    "value" => 13,
-                    "message" => "mobile_number_maxlength",
+                    "message" => "address_required",
                 )
-            )
+            ),
+
+              "city" => array(
+                array(
+                    "rule" => "required",
+                    "value" => TRUE,
+                    "message" => "city_required",
+                )
+            ),
+         
+          
+          
         );
         $valid_res = $this->wsresponse->validateInputParams($valid_arr, $request_arr, "edit_profile");
 
@@ -339,6 +312,14 @@ class Edit_profile extends Cit_Controller
             {
                 $params_arr["user_profile"] = $images_arr["user_profile"]["name"];
             }
+
+             if (!empty($input_params["delete_user_profile"]))
+            {
+                $params_arr["delete_user_profile"] = $input_params["delete_user_profile"];
+            }
+
+
+            
             if (isset($input_params["dob"]))
             {
                 $params_arr["dob"] = $input_params["dob"];

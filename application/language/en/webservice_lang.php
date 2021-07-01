@@ -287,3 +287,28 @@
 
 //delete_api_log Messages
     $lang["delete_api_log"]["api_accesslogs_finish_success"] = "Success" ;
+
+
+    // My list Api messages
+
+    $lang["get_my_list"]["get_list_finish_success"] = "List fetch successfully" ;
+
+    $lang["get_my_list"]["get_list_finish_success_1"] = "No data available" ;
+
+    $lang["add_my_list"]["user_service_finish_success_1"] = "List not added" ;  
+
+    $lang["delete_list"]["delete_list_finish_success_1"] = "List not deleted" ; 
+
+    $lang["delete_list"]["delete_list_finish_success"] = "List delete successfully"; 
+
+//my list data message
+
+     $lang["get_my_data_list"]["get_list_finish_success"] = "Item list fetch successfully";
+
+    $lang["get_my_data_list"]["get_list_finish_success_1"] = "No data available" ;
+
+    $lang["add_my_list_data"]["user_service_finish_success_1"] = "List data not added" ;  
+
+    $lang["delete_data_list"]["delete_list_finish_success_1"] = "List data not deleted" ; 
+
+    $lang["delete_data_list"]["delete_list_finish_success"] = "List data delete successfully"; 

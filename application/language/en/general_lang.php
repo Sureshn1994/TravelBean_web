@@ -1079,7 +1079,7 @@ $lang["USERS_MANAGEMENT_LONGITUDE"] = "Longitude" ;
 $lang["USERS_MANAGEMENT_ZIP_CODE"] = "Zip Code" ;
 $lang["USERS_MANAGEMENT_DOB"] = "Dob" ;
 $lang["USERS_MANAGEMENT_PUSH_NOTIFY"] = "Push Notify" ;
-$lang["USERS_MANAGEMENT_ONE_TIME_TRANSACTION"] = "One Time Transaction" ;
+$lang["USERS_MANAGEMENT_ONE_TIME_TRANSACTION"] = "Go Add Free" ;
 $lang["USERS_MANAGEMENT_ACCESS_TOKEN"] = "Access Token" ;
 $lang["USERS_MANAGEMENT_RESET_PASSWORD_CODE"] = "Reset Password Code" ;
 $lang["USERS_MANAGEMENT_EMAIL_VERIFICATION_CODE"] = "Email Verification Code" ;
@@ -1138,6 +1138,8 @@ $lang["FEEDBACK_MANAGEMENT_DEVICE_TYPE"] = "Device Type" ;
 $lang["FEEDBACK_MANAGEMENT_DEVICE_MODEL"] = "Device Model" ;
 $lang["FEEDBACK_MANAGEMENT_DEVICE_OS"] = "Device Os" ;
 $lang["USERS_MANAGEMENT_USERNAME"] = "Username" ;
+
+$lang["USERS_MANAGEMENT_GO_ADD_FREE"] = "Go ad free" ;
 $lang["USERS_MANAGEMENT_"] = "" ;
 $lang["QUERY_IMAGES_QUERY_IMAGES"] = "Query Images" ;
 $lang["QUERY_IMAGES_USER_QUERY_ID"] = "User Query Id" ;

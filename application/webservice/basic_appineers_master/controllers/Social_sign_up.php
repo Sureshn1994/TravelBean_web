@@ -89,47 +89,27 @@ class Social_sign_up extends Cit_Controller
                     "message" => "last_name_maxlength",
                 )
             ),
-            "user_name" => array(
+            
+           "email" => array(
                 array(
-                    "rule" => "regex",
-                    "value" => "/^[0-9a-zA-Z]+$/",
-                    "message" => "user_name_alpha_numeric_without_spaces",
+                    "rule" => "email",
+                    "value" => TRUE,
+                    "message" => "email_email",
                 ),
                 array(
-                    "rule" => "minlength",
-                    "value" => 5,
-                    "message" => "user_name_minlength",
-                ),
-                array(
-                    "rule" => "maxlength",
-                    "value" => 20,
-                    "message" => "user_name_maxlength",
+                    "rule" => "required",
+                    "value" => TRUE,
+                    "message" => "email_required",
                 )
             ),
-            "email" => array(
+             "email" => array(
                 array(
                     "rule" => "email",
                     "value" => TRUE,
                     "message" => "email_email",
                 )
             ),
-            "mobile_number" => array(
-                array(
-                    "rule" => "number",
-                    "value" => TRUE,
-                    "message" => "mobile_number_number",
-                ),
-                array(
-                    "rule" => "minlength",
-                    "value" => 10,
-                    "message" => "mobile_number_minlength",
-                ),
-                array(
-                    "rule" => "maxlength",
-                    "value" => 13,
-                    "message" => "mobile_number_maxlength",
-                )
-            ),
+           
             "dob" => array(
                 array(
                     "rule" => "regex",

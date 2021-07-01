@@ -65,6 +65,12 @@ class My_list_model extends CI_Model
             {
                 $this->db->set("vAddress", $params_arr["address"]);
             }
+
+             if (isset($params_arr["zip_code"]))
+            {
+                $this->db->set("vZipCode", $params_arr["zip_code"]);
+            }
+
             if (isset($params_arr["to_country_code"]))
             {
                 $this->db->set("VToCountryCode", $params_arr["to_country_code"]);
@@ -136,16 +142,21 @@ class My_list_model extends CI_Model
 
             $this->db->start_cache();
             $this->db->from("my_list AS ml");
+           // $this->db->join("my_list_data AS mld", "mld.iMyListId = ml.iMyListId", "left");
+
+            // $this->db->select("SUM(mld.dAmount) AS total_amount");
+             //  $this->db->select("SUM(mld.dTaxAmout) AS total_tax");
             $this->db->select("ml.iMyListId AS list_id");
             $this->db->select("ml.vListName AS list_name");
             $this->db->select("ml.vAddress AS address");
+             $this->db->select("ml.vZipCode AS zipcode");
             $this->db->select("ml.VFromCountryCode  AS from_country_code");
             $this->db->select("ml.vFromCountryName AS from_country_name");
             $this->db->select("ml.vFromCurrency AS from_currency");
-            $this->db->select("ml.vContinent AS continent");
-            $this->db->select("ml.VToCountryCode AS To_country_code");
-            $this->db->select("ml.vToCountryName AS To_country_name");
-            $this->db->select("ml.vToCurrency AS To_currency");
+            $this->db->select("ml.vContinent AS from_continent");
+            $this->db->select("ml.VToCountryCode AS to_country_code");
+            $this->db->select("ml.vToCountryName AS to_country_name");
+            $this->db->select("ml.vToCurrency AS to_currency");
             $this->db->select("ml.dtAddedAt AS created_date");
             if (isset($arrResult['user_id']) && $arrResult['user_id'] != "")
             {
@@ -158,7 +169,7 @@ class My_list_model extends CI_Model
             $this->db->order_by("ml.dtAddedAt", "desc");
            
             $result_obj = $this->db->get();
-            //echo $this->db->last_query();exit;
+           // echo $this->db->last_query();exit;
             $result_arr = is_object($result_obj) ? $result_obj->result_array() : array();
             $this->db->flush_cache();
             if (!is_array($result_arr) || count($result_arr) == 0)
@@ -179,6 +190,39 @@ class My_list_model extends CI_Model
         $return_arr["data"] = $result_arr;
         return $return_arr;
     }
+
+     public function get_sum_list_amout($list_id)
+    {
+        try
+        {
+
+            $strSql ="select SUM(dAmount) as total_list_amout,SUM(dTaxAmout) as total_tax_amout,SUM(dTotalAmout) as total_product_amount from my_list_data where iMyListId ='".$list_id."'";
+            $result_obj =  $this->db->query($strSql);
+        
+            $result_arr = is_object($result_obj) ? $result_obj->result_array() : array();
+           // echo $this->db->last_query();exit;
+         
+            if (!is_array($result_arr) || count($result_arr) == 0)
+            {
+                throw new Exception('No records found.');
+            }
+            $success = 1;
+            }
+        catch(Exception $e)
+        {
+            $success = 0;
+            $message = $e->getMessage();
+        }
+
+        $this->db->_reset_all();
+        //echo $this->db->last_query();exit;
+        $return_arr["success"] = $success;
+        $return_arr["message"] = $message;
+        $return_arr["data"] = $result_arr;
+        return $return_arr;
+    }
+
+
    
 
     public function delete_list($params_arr = array())

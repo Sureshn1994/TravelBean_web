@@ -98,6 +98,32 @@ if (strstr($_SERVER['HTTP_HOST'], '18.211.58.235')) {
       'timezone' => '',
       'save_queries' => TRUE
   );
+  
+  }else if (strstr($_SERVER['HTTP_HOST'], '3.225.83.133')) {
+
+  $db['default'] = array(
+      'dsn' => '',
+      'hostname' => 'localhost',
+      'username' => 'root',
+      'password' => 'Aws!2020',
+      'database' => 'travel_bean',
+      'port' => '',
+      'dbdriver' => 'mysqli',
+      'dbprefix' => '',
+      'pconnect' => FALSE,
+      'db_debug' => TRUE,
+      'cache_on' => FALSE,
+      'cachedir' => '',
+      'char_set' => 'utf8',
+      'dbcollat' => 'utf8_general_ci',
+      'swap_pre' => '',
+      'encrypt' => FALSE,
+      'compress' => FALSE,
+      'stricton' => FALSE,
+      'failover' => array(),
+      'timezone' => '',
+      'save_queries' => TRUE
+  );
 
 } else { 
 
