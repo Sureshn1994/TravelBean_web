@@ -19,7 +19,7 @@
 
 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-6 current_page_item menu-item-61 et-show-dropdown et-hover"><a href="<%$this->config->item('site_url')%>privacy-policy.html" aria-current="page">Privacy Policy</a></li>
 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-6 current_page_item menu-item-61 et-show-dropdown et-hover"><a href="<%$this->config->item('site_url')%>terms-conditions.html">Terms and Conditions</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-6 current_page_item menu-item-61 et-show-dropdown et-hover"><a href="<%$this->config->item('site_url')%>end_user_license_agreement.html">EULA</a></li>
+<!--<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-6 current_page_item menu-item-61 et-show-dropdown et-hover"><a href="<%$this->config->item('site_url')%>end_user_license_agreement.html">EULA</a></li>-->
 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-6 current_page_item menu-item-61 et-show-dropdown et-hover"><a href="<%$this->config->item('site_url')%>admin" aria-current="page" target="_blank">Admin</a></li>
 
 </ul>                       

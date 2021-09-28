@@ -288,8 +288,8 @@ class Users_management_model extends CI_Model
                 $this->db->select($this->table_alias . "." . $this->primary_key . " AS " . $this->primary_alias);
             }
             $this->db->select("u.vProfileImage AS u_profile_image");
-        $this->db->select("concat(u.vFirstName,\"\",u.vLastName) AS u_first_name");
-        $this->db->select("u.eOneTimeTransaction AS u_go_ad_free");
+        $this->db->select("concat(u.vFirstName,\" \",u.vLastName) AS u_first_name");
+       // $this->db->select("u.eOneTimeTransaction AS u_go_ad_free");
         $this->db->select("u.vEmail AS u_email");
        
         $this->db->select("u.dtAddedAt AS u_added_at");
@@ -299,6 +299,7 @@ class Users_management_model extends CI_Model
         } else {
             $this->db->select("u.iUserId AS iUserId");
             $this->db->select("u.iUserId AS u_user_id");
+            $this->db->select("u.iUserId AS user_id");
             $this->db->select("u.vProfileImage AS u_profile_image");
             $this->db->select("u.vFirstName AS u_first_name");
             $this->db->select("u.vLastName AS u_last_name");
@@ -328,7 +329,7 @@ class Users_management_model extends CI_Model
             $this->db->select("u.vDeviceToken AS u_device_token");
             $this->db->select("u.dtAddedAt AS u_added_at");
             $this->db->select("u.dtUpdatedAt AS u_updated_at");
-            $this->db->select("u.eOneTimeTransaction AS u_one_time_transaction");
+            //$this->db->select("u.eOneTimeTransaction AS u_one_time_transaction");
             $this->db->select("u.vDeviceModel AS u_device_model");
             $this->db->select("u.vDeviceOS AS u_device_os");
             $this->db->select("u.eLogStatus AS u_log_status_updated");
@@ -374,7 +375,42 @@ class Users_management_model extends CI_Model
         }
         $data_obj = $this->db->get();
         $data_arr = is_object($data_obj) ? $data_obj->result_array() : array();
+
+
         #echo $this->db->last_query();
+         foreach ($data_arr as $key => $val) {
+
+                $user_id=$val['user_id'];
+
+            if (isset($user_id) && $user_id != "")
+            {
+                $this->db->from("user_subscription as us");
+                $this->db->select("us.vProductId as u_product");
+                $this->db->select("us.iUserId as user_id");
+                $this->db->where("us.iUserId =", $user_id);
+               
+                $this->db->limit(1);
+
+                $result_objjj = $this->db->get();
+               // echo $this->db->last_query();
+                
+              if(!empty($result_objjj->result_array()))
+              {
+                $u_go_ad_free="Yes";
+              }else
+              {
+                $u_go_ad_free="No";
+              }
+
+             
+                  
+                
+                $data_arr[$key]["u_one_time_transaction"] = $u_go_ad_free;
+            
+                
+            }
+
+        }
         return $data_arr;
     }
     
@@ -454,8 +490,9 @@ class Users_management_model extends CI_Model
             $this->db->select($this->table_alias . "." . $this->primary_key . " AS " . $this->primary_alias);
         }
         $this->db->select("u.vProfileImage AS u_profile_image");
-        $this->db->select("concat(u.vFirstName,\"\",u.vLastName) AS u_first_name");
-        $this->db->select("u.eOneTimeTransaction AS u_go_ad_free");
+        $this->db->select("u.iUserId AS user_id");
+        $this->db->select("concat(u.vFirstName,\" \",u.vLastName) AS u_first_name");
+        //$this->db->select("u.eOneTimeTransaction AS u_go_ad_free");
         $this->db->select("u.vEmail AS u_email");
     
         $this->db->select("u.dtAddedAt AS u_added_at");
@@ -480,11 +517,49 @@ class Users_management_model extends CI_Model
         $limit_offset = $this->listing->getStartIndex($total_records, $page, $rec_per_page);
         $this->db->limit($rec_per_page, $limit_offset);
         $return_data_obj = $this->db->get();
+
+
+
         $return_data = is_object($return_data_obj) ? $return_data_obj->result_array() : array();
+
+         foreach ($return_data as $key => $val) {
+
+                $user_id=$val['user_id'];
+
+            if (isset($user_id) && $user_id != "")
+            {
+                $this->db->from("user_subscription as us");
+                $this->db->select("us.vProductId as u_product");
+                $this->db->select("us.iUserId as user_id");
+                $this->db->where("us.iUserId =", $user_id);
+               
+                $this->db->limit(1);
+
+                $result_objjj = $this->db->get();
+               // echo $this->db->last_query();
+                
+              if(!empty($result_objjj->result_array()))
+              {
+                $u_go_ad_free="Yes";
+              }else
+              {
+                $u_go_ad_free="No";
+              }
+                  
+                
+                $return_data[$key]["u_go_ad_free"] = $u_go_ad_free;
+            
+                
+            }
+
+        }
+
+
         $this->db->flush_cache();
         $listing_data = $this->listing->getDataForJqGrid($return_data, $filter_config, $page, $total_pages, $total_records);
         $this->listing_data = $return_data;
-        #echo $this->db->last_query();
+        //echo $this->db->last_query();
+        //exit;
         return $listing_data;
     }
     
@@ -652,7 +727,7 @@ class Users_management_model extends CI_Model
                 "table_alias" => "u",
                 "field_name" => "vFirstName",
                 "source_field" => "u_first_name",
-                "display_query" => "concat(u.vFirstName,\"\",u.vLastName)",
+                "display_query" => "concat(u.vFirstName,\" \",u.vLastName)",
                 "entry_type" => "Table",
                 "data_type" => "varchar",
                 "show_in" => "Both",
@@ -1040,19 +1115,7 @@ class Users_management_model extends CI_Model
                 "default" => $this->filter->getDefaultValue("u_push_notify","Text","Yes"),
                 "dfapply" => "forceApply"
             ),
-                "u_one_time_transaction" => array(
-                "name" => "u_one_time_transaction",
-                "table_name" => "users",
-                "table_alias" => "u",
-                "field_name" => "tOneTimeTransaction",
-                "entry_type" => "Table",
-                "data_type" => "text",
-                "show_input" => "Hidden",
-                "type" => "textbox",
-                "label" => "Go add Free",
-                "lang_code" => "USERS_MANAGEMENT_ONE_TIME_TRANSACTION",
-                "label_lang" => $this->lang->line('USERS_MANAGEMENT_ONE_TIME_TRANSACTION')
-            ),
+                
                 "u_access_token" => array(
                 "name" => "u_access_token",
                 "table_name" => "users",
@@ -1189,19 +1252,7 @@ class Users_management_model extends CI_Model
                 "dfapply" => "forceApply",
                 "format" => $this->general->getAdminPHPFormats('date')
             ),
-                "u_one_time_transaction" => array(
-                "name" => "u_one_time_transaction",
-                "table_name" => "users",
-                "table_alias" => "u",
-                "field_name" => "eOneTimeTransaction",
-                "entry_type" => "Table",
-                "data_type" => "enum",
-                "show_input" => "Hidden",
-                "type" => "dropdown",
-                "label" => "One Time Transaction",
-                "lang_code" => "USERS_MANAGEMENT_ONE_TIME_TRANSACTION",
-                "label_lang" => $this->lang->line('USERS_MANAGEMENT_ONE_TIME_TRANSACTION')
-            ),
+              
                 "u_device_model" => array(
                 "name" => "u_device_model",
                 "table_name" => "users",

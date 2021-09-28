@@ -1,4 +1,6 @@
 RewriteEngine On
+RewriteCond %{HTTPS}  !=on 
+RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
 
 #IF site is working on the subdomain then only add the rewrite 
 #####GENERATED_SUB_DOAMIN_CONFIG_START#####

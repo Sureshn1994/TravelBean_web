@@ -59,13 +59,14 @@ public function returnConfigParams(&$input_params=array()){
     if(!empty($userid)){
         $return_arr['terms_conditions_updated']=1;
         $return_arr['privacy_policy_updated']  =1;
-        $this->db->select('vTermsConditionsVersion,vPrivacyPolicyVersion,eLogStatus');
+        $this->db->select('vTermsConditionsVersion,vPrivacyPolicyVersion,eLogStatus,tAddress');
         $this->db->from('users');
         $this->db->where('iUserId',$userid);
         $version_data=$this->db->get()->row_array();
         $terms_conditions_version=$version_data['vTermsConditionsVersion'];
         $privacy_policy_version  =$version_data['vPrivacyPolicyVersion'];
         $return_arr['log_status_updated']=$version_data['eLogStatus']; 
+        $return_arr['address']=$version_data['tAddress']; 
            $this->db->select('vProductId as product_id,dLatestExpiryDate,"" as subscription_status, lReceiptData as purchase_token'); //vOrginalTransactionId
             $this->db->from('user_subscription');
             $this->db->where('iUserId',$userid);

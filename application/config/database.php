@@ -73,13 +73,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
-if (strstr($_SERVER['HTTP_HOST'], '18.211.58.235')) {
+if (strstr($_SERVER['HTTP_HOST'], 'travelbeanmobile.com')) {
 
   $db['default'] = array(
       'dsn' => '',
-      'hostname' => 'database-1.cubyuiyvifow.us-east-1.rds.amazonaws.com',
+      'hostname' => 'travelbean.cwmms5mx1ddm.us-east-1.rds.amazonaws.com',
       'username' => 'admin',
-      'password' => 'success2020!!',
+      'password' => 'CbZKf0EnVMJZJKsXxQmA',
       'database' => 'travel_bean',
       'port' => '',
       'dbdriver' => 'mysqli',

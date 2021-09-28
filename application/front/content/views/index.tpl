@@ -101,9 +101,11 @@
                                     <!-- Slider btn -->
                                    <div class="slider-btns">
                                         <!-- Hero-btn -->
-                                        <a data-animation="fadeInLeft" data-delay="1.0s" href="#downloadSection" class="btn radius-btn">Download</a>
+                                        <a data-animation="fadeInLeft" data-delay="1.0s" href="#" class="btn radius-btn">App Store</a>
+                                        <a data-animation="fadeInLeft" data-delay="1.0s" href="#" class="btn radius-btn">Google Play</a>
                                        
                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-lg-6">
