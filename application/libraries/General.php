@@ -5785,6 +5785,105 @@ EOD;
         }
         return $success;
     }
+	
+	 /**
+     * apiLogger method is used to log the exceptions into logs table.
+     * @created  shri | 12.04.2021
+     * @modified shri | 12.04.2021
+     * @param array $params_arr input parameters
+     * @param array $e exception array.
+     * @return array $e return_arr.
+     */
+    public function apiLogger($input_params = array(), $e = NULL)
+    {
+        
+        $this->CI = &get_instance();
+
+        $ip_addr = $this->getHTTPRealIPAddr();
+        $user_agent = $_SERVER['HTTP_USER_AGENT'];
+        $plat_form = $this->get_platform($user_agent);
+        
+        $browser = $this->get_browser($user_agent);
+
+        $request_func = $this->CI->uri->segments[2];
+        $request_url = !empty($input_params['request_url']) ? $input_params['request_url'] : "";
+        $file_name_func = !empty($input_params['file_name_func']) ? $input_params['file_name_func'] : "";
+        $output_response = !empty($input_params['output_response']) ? $input_params['output_response'] : "";
+        $accessed_time = !empty($input_params['accessed_time']) ? $input_params['accessed_time'] : "";
+        $executed_time = !empty($input_params['executed_time']) ? $input_params['executed_time'] : "";
+        $db_query = !empty($input_params['db_query']) ? $input_params['db_query'] : "";
+        $request_method = $_SERVER['REQUEST_METHOD'];
+        // Input Params and Output Response file creation => start
+        list($start_micro, $start_date) = explode(" ", $accessed_time);
+        list($executed_micro, $execute_date) = explode(" ", $executed_time);
+
+        $access_date = date("Y-m-d H:i:s", $start_date);
+        $executed_date = date("Y-m-d H:i:s", $execute_date);
+        
+        $start_time = microtime();
+        $exe_arr = array(
+            "ip_addr" => $ip_addr,
+            "method" => $request_func,
+            "start" => $start_time
+        );
+
+        // Access Logs insertion => start
+        if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   {
+            $request_url = "https://";   
+        }
+        else  {
+            $request_url = "http://";
+        }
+        // Append the host(domain name, ip) to the URL.   
+        $request_url.= $_SERVER['HTTP_HOST']; 
+        
+        // Append the requested resource location to the URL   
+        $request_url.= $_SERVER['REQUEST_URI'];
+
+        list($start_micro, $start_date) = explode(" ", $start_time);
+        $access_date = date("Y-m-d H:i:s", $start_date);
+        // Input Params and Output Response file creation => end
+       
+        $start_time = $this->CI->session->userdata('start_time');
+        
+        $end_time = microtime(true);
+  
+        // Calculate script execution time
+        $execution_time = ($end_time - $start_time);
+       
+        $this->CI->benchmark->mark('code_end');
+
+        $data_array = array();
+        $data_array['iPerformedBy'] = $input_params['user_id'] ?? 0;
+        $data_array['vAPIURL'] = $request_url;
+        $data_array['vAPIName'] = $request_func;
+        $data_array['vPlatform'] = $plat_form;
+        $data_array['vBrowser'] = $browser;
+        $data_array['vIPAddress'] = $ip_addr;
+        $data_array['dAccessDate'] = $access_date;
+        $data_array['dtExecutedDate'] = $executed_date;
+        $data_array['vRequestMethod']   = $request_method;
+        $data_array['vErrorType'] = "Exception";
+        $data_array['vErrorMessage'] = $e->getMessage();
+        $data_array['vDbQuery'] = $db_query;
+        $data_array['jInputParam'] = json_encode($input_params);
+        $data_array['lErrorStack'] = $e;
+        $data_array['iErrorCode'] = $e->getCode();
+        $data_array['vErrorFile'] = $e->getFile();
+        $data_array['fExcutionTime'] = $this->CI->benchmark->elapsed_time('code_start', 'code_end');
+       
+        $result = $this->CI->db->insert('api_accesslogs', $data_array);
+        if (!empty($result))
+        {
+            $return_arr['success'] = true;
+        }
+        else
+        {
+            $return_arr['success'] = false;
+        }
+
+        return $return_arr;
+    }
 
 
     

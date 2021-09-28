@@ -15,12 +15,7 @@ defined('BASEPATH') || exit('No direct script access allowed');
  * @class Users_model.php
  *
  * @path application\webservice\basic_appineers_master\models\Users_model.php
- *
- * @version 4.4
- *
- * @author CIT Dev Team
- *
- * @since 12.02.2020
+ * 
  */
 
 class Users_model extends CI_Model
@@ -28,7 +23,7 @@ class Users_model extends CI_Model
     public $default_lang = 'EN';
 
     /**
-     * __construct method is used to set model preferences while model object initialization.
+     * To initialize class objects/variables.
      */
     public function __construct()
     {
@@ -38,20 +33,18 @@ class Users_model extends CI_Model
     }
 
     /**
-     * logout method is used to execute database queries for Logout API.
-     * @created CIT Dev Team
-     * @modified priyanka chillakuru | 13.09.2019
+     * This method is used to execute database queries for Logout API.
+     * 
      * @param array $params_arr params_arr array to process query block.
      * @param array $where_arr where_arr are used to process where condition(s).
+     * 
      * @return array $return_arr returns response of query block.
      */
     public function logout($params_arr = array(), $where_arr = array())
     {
-        try
-        {
+        try {
             $result_arr = array();
-            if (isset($where_arr["user_id"]) && $where_arr["user_id"] != "")
-            {
+            if (isset($where_arr["user_id"]) && $where_arr["user_id"] != "") {
                 $this->db->where("iUserId =", $where_arr["user_id"]);
             }
             $this->db->where_in("eStatus", array('Active'));
@@ -60,16 +53,13 @@ class Users_model extends CI_Model
             $this->db->set($this->db->protect("vDeviceToken"), $params_arr["_vdevicetoken"], FALSE);
             $res = $this->db->update("users");
             $affected_rows = $this->db->affected_rows();
-            if (!$res || $affected_rows == -1)
-            {
+            if (!$res || $affected_rows == -1) {
                 throw new Exception("Failure in updation.");
             }
             $result_param = "affected_rows";
             $result_arr[0][$result_param] = $affected_rows;
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -83,39 +73,33 @@ class Users_model extends CI_Model
     }
 
     /**
-     * update_device_token method is used to execute database queries for Update Device Token API.
-     * @created CIT Dev Team
-     * @modified priyanka chillakuru | 13.09.2019
+     * This method is used to execute database queries for Update Device Token API.
+     * 
      * @param array $params_arr params_arr array to process query block.
      * @param array $where_arr where_arr are used to process where condition(s).
+     * 
      * @return array $return_arr returns response of query block.
      */
     public function update_device_token($params_arr = array(), $where_arr = array())
     {
-        try
-        {
+        try {
             $result_arr = array();
-            if (isset($where_arr["user_id"]) && $where_arr["user_id"] != "")
-            {
+            if (isset($where_arr["user_id"]) && $where_arr["user_id"] != "") {
                 $this->db->where("iUserId =", $where_arr["user_id"]);
             }
-            if (isset($params_arr["device_token"]))
-            {
+            if (isset($params_arr["device_token"])) {
                 $this->db->set("vDeviceToken", $params_arr["device_token"]);
             }
             $this->db->set($this->db->protect("dtUpdatedAt"), $params_arr["_dtupdatedat"], FALSE);
             $res = $this->db->update("users");
             $affected_rows = $this->db->affected_rows();
-            if (!$res || $affected_rows == -1)
-            {
+            if (!$res || $affected_rows == -1) {
                 throw new Exception("Failure in updation.");
             }
             $result_param = "affected_rows";
             $result_arr[0][$result_param] = $affected_rows;
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -129,41 +113,35 @@ class Users_model extends CI_Model
     }
 
     /**
-     * update_notification method is used to execute database queries for Update Push Notification Settings API.
-     * @created CIT Dev Team
-     * @modified priyanka chillakuru | 17.09.2019
+     * This method is used to execute database queries for Update Push Notification Settings API.
+     * 
      * @param array $params_arr params_arr array to process query block.
      * @param array $where_arr where_arr are used to process where condition(s).
+     * 
      * @return array $return_arr returns response of query block.
      */
     public function update_notification($params_arr = array(), $where_arr = array())
     {
-        try
-        {
+        try {
             $result_arr = array();
 
             $this->db->where_in("eStatus", array('Active'));
-            if (isset($where_arr["user_id"]) && $where_arr["user_id"] != "")
-            {
+            if (isset($where_arr["user_id"]) && $where_arr["user_id"] != "") {
                 $this->db->where("iUserId =", $where_arr["user_id"]);
             }
-            if (isset($params_arr["notification"]))
-            {
+            if (isset($params_arr["notification"])) {
                 $this->db->set("ePushNotify", $params_arr["notification"]);
             }
             $this->db->set($this->db->protect("dtUpdatedAt"), $params_arr["_dtupdatedat"], FALSE);
             $res = $this->db->update("users");
             $affected_rows = $this->db->affected_rows();
-            if (!$res || $affected_rows == -1)
-            {
+            if (!$res || $affected_rows == -1) {
                 throw new Exception("Failure in updation.");
             }
             $result_param = "affected_rows";
             $result_arr[0][$result_param] = $affected_rows;
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -177,39 +155,33 @@ class Users_model extends CI_Model
     }
 
     /**
-     * update_new_password method is used to execute database queries for Change Password API.
-     * @created CIT Dev Team
-     * @modified priyanka chillakuru | 13.09.2019
+     * This method is used to execute database queries for Change Password API.
+     * 
      * @param array $params_arr params_arr array to process query block.
      * @param array $where_arr where_arr are used to process where condition(s).
+     * 
      * @return array $return_arr returns response of query block.
      */
     public function update_new_password($params_arr = array(), $where_arr = array())
     {
-        try
-        {
+        try {
             $result_arr = array();
-            if (isset($where_arr["user_id"]) && $where_arr["user_id"] != "")
-            {
+            if (isset($where_arr["user_id"]) && $where_arr["user_id"] != "") {
                 $this->db->where("iUserId =", $where_arr["user_id"]);
             }
             $this->db->where_in("eStatus", array('Active'));
-            if (isset($params_arr["new_password"]))
-            {
+            if (isset($params_arr["new_password"])) {
                 $this->db->set("vPassword", $params_arr["new_password"]);
             }
             $res = $this->db->update("users");
             $affected_rows = $this->db->affected_rows();
-            if (!$res || $affected_rows == -1)
-            {
+            if (!$res || $affected_rows == -1) {
                 throw new Exception("Failure in updation.");
             }
             $result_param = "affected_rows";
             $result_arr[0][$result_param] = $affected_rows;
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -222,7 +194,7 @@ class Users_model extends CI_Model
         return $return_arr;
     }
 
- /**
+    /**
      * add_transaction_data method is used to execute database queries for Go Ad Free API.
      * @created priyanka chillakuru | 26.09.2019
      * @modified priyanka chillakuru | 26.09.2019
@@ -232,45 +204,36 @@ class Users_model extends CI_Model
      */
     public function add_transaction_data($params_arr = array(), $where_arr = array())
     {
-        try
-        {
-               $result_arr = array();
-            if (isset($params_arr["user_id"]))
-            {
+        try {
+            $result_arr = array();
+            if (isset($params_arr["user_id"])) {
                 $this->db->set("iUserId", $params_arr["user_id"]);
             }
 
-            if (isset($params_arr["original_transaction_id"]))
-            {
+            if (isset($params_arr["original_transaction_id"])) {
                 $this->db->set("vOrginalTransactionId", $params_arr["original_transaction_id"]);
             }
             $this->db->set("eDeviceType", $params_arr["receipt_type"]);
-            if (isset($params_arr["receipt_data_v1"]))
-            {
+            if (isset($params_arr["receipt_data_v1"])) {
                 $this->db->set("lReceiptData", $params_arr["receipt_data_v1"]);
             }
-             if (isset($params_arr["expiry_date_v1"]))
-            {
+            if (isset($params_arr["expiry_date_v1"])) {
                 $this->db->set("dLatestExpiryDate", $params_arr["expiry_date_v1"]);
             }
-            if (isset($params_arr["product_id"]))
-            {
+            if (isset($params_arr["product_id"])) {
                 $this->db->set("vProductId", $params_arr["product_id"]);
             }
 
-           // $this->db->set($this->db->protect("dtAddedAt"), $params_arr["_dtaddedat"], FALSE);
+            // $this->db->set($this->db->protect("dtAddedAt"), $params_arr["_dtaddedat"], FALSE);
             $this->db->insert("user_subscription");
             $insert_id = $this->db->insert_id();
-            if (!$insert_id)
-            {
+            if (!$insert_id) {
                 throw new Exception("Failure in insertion.");
             }
             $result_param = "insert_id";
             $result_arr[0][$result_param] = $insert_id;
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -283,7 +246,7 @@ class Users_model extends CI_Model
         return $return_arr;
     }
 
-    
+
 
     /**
      * check_unique_mobile_number method is used to execute database queries for Change Mobile Number API.
@@ -294,15 +257,13 @@ class Users_model extends CI_Model
      */
     public function check_unique_mobile_number($new_mobile_number = '')
     {
-        try
-        {
+        try {
             $result_arr = array();
 
             $this->db->from("users AS u");
 
             $this->db->select("u.iUserId AS u_user_id");
-            if (isset($new_mobile_number) && $new_mobile_number != "")
-            {
+            if (isset($new_mobile_number) && $new_mobile_number != "") {
                 $this->db->where("u.vMobileNo =", $new_mobile_number);
             }
 
@@ -310,14 +271,11 @@ class Users_model extends CI_Model
 
             $result_obj = $this->db->get();
             $result_arr = is_object($result_obj) ? $result_obj->result_array() : array();
-            if (!is_array($result_arr) || count($result_arr) == 0)
-            {
+            if (!is_array($result_arr) || count($result_arr) == 0) {
                 throw new Exception('No records found.');
             }
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -340,30 +298,24 @@ class Users_model extends CI_Model
      */
     public function update_mobile_number($params_arr = array(), $where_arr = array())
     {
-        try
-        {
+        try {
             $result_arr = array();
-            if (isset($where_arr["user_id"]) && $where_arr["user_id"] != "")
-            {
+            if (isset($where_arr["user_id"]) && $where_arr["user_id"] != "") {
                 $this->db->where("iUserId =", $where_arr["user_id"]);
             }
-            if (isset($params_arr["new_mobile_number"]))
-            {
+            if (isset($params_arr["new_mobile_number"])) {
                 $this->db->set("vMobileNo", $params_arr["new_mobile_number"]);
             }
             $this->db->set($this->db->protect("dtUpdatedAt"), $params_arr["_dtupdatedat"], FALSE);
             $res = $this->db->update("users");
             $affected_rows = $this->db->affected_rows();
-            if (!$res || $affected_rows == -1)
-            {
+            if (!$res || $affected_rows == -1) {
                 throw new Exception("Failure in updation.");
             }
             $result_param = "affected_rows";
             $result_arr[0][$result_param] = $affected_rows;
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -376,27 +328,24 @@ class Users_model extends CI_Model
         return $return_arr;
     }
 
-     public function get_subscription_details($user_id){
-        
-        try
-        {
+    public function get_subscription_details($user_id)
+    {
 
-          $this->db->select('vProductId as product_id,dLatestExpiryDate,"" as subscription_status, lReceiptData as purchase_token'); //vOrginalTransactionId
+        try {
+
+            $this->db->select('vProductId as product_id,dLatestExpiryDate,"" as subscription_status, lReceiptData as purchase_token'); //vOrginalTransactionId
             $this->db->from('user_subscription');
-            $this->db->where('iUserId',$user_id);
-            $this->db->order_by('dLatestExpiryDate','DESC');
-             $result_obj = $this->db->get();
-             //echo $this->db->last_query();
-             //exit;
+            $this->db->where('iUserId', $user_id);
+            $this->db->order_by('dLatestExpiryDate', 'DESC');
+            $result_obj = $this->db->get();
+            //echo $this->db->last_query();
+            //exit;
             $result_arr = is_object($result_obj) ? $result_obj->result_array() : array();
-            if (!is_array($result_arr) || count($result_arr) == 0)
-            {
+            if (!is_array($result_arr) || count($result_arr) == 0) {
                 throw new Exception('No records found.');
             }
             $success = 1;
-            }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -418,8 +367,7 @@ class Users_model extends CI_Model
      */
     public function get_user($email = '')
     {
-        try
-        {
+        try {
             $result_arr = array();
 
             $this->db->from("users AS u");
@@ -428,8 +376,7 @@ class Users_model extends CI_Model
             $this->db->select("u.vEmail AS u_email");
             $this->db->select("u.eStatus AS u_status");
             $this->db->select("u.iUserId AS u_user_id");
-            if (isset($email) && $email != "")
-            {
+            if (isset($email) && $email != "") {
                 $this->db->where("u.vEmail =", $email);
             }
 
@@ -437,14 +384,11 @@ class Users_model extends CI_Model
 
             $result_obj = $this->db->get();
             $result_arr = is_object($result_obj) ? $result_obj->result_array() : array();
-            if (!is_array($result_arr) || count($result_arr) == 0)
-            {
+            if (!is_array($result_arr) || count($result_arr) == 0) {
                 throw new Exception('No records found.');
             }
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -467,15 +411,12 @@ class Users_model extends CI_Model
      */
     public function update_confirmation($params_arr = array(), $where_arr = array())
     {
-        try
-        {
+        try {
             $result_arr = array();
-            if (isset($where_arr["u_user_id"]) && $where_arr["u_user_id"] != "")
-            {
+            if (isset($where_arr["u_user_id"]) && $where_arr["u_user_id"] != "") {
                 $this->db->where("iUserId =", $where_arr["u_user_id"]);
             }
-            if (isset($where_arr["confirmation_code"]) && $where_arr["confirmation_code"] != "")
-            {
+            if (isset($where_arr["confirmation_code"]) && $where_arr["confirmation_code"] != "") {
                 $this->db->where("vEmailVerificationCode =", $where_arr["confirmation_code"]);
             }
 
@@ -484,16 +425,13 @@ class Users_model extends CI_Model
             $this->db->set($this->db->protect("dtUpdatedAt"), $params_arr["_dtupdatedat"], FALSE);
             $res = $this->db->update("users");
             $affected_rows = $this->db->affected_rows();
-            if (!$res || $affected_rows == -1)
-            {
+            if (!$res || $affected_rows == -1) {
                 throw new Exception("Failure in updation.");
             }
             $result_param = "affected_rows";
             $result_arr[0][$result_param] = $affected_rows;
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -507,124 +445,98 @@ class Users_model extends CI_Model
     }
 
     /**
-     * create_user method is used to execute database queries for User Sign Up Email API.
-     * @created priyanka chillakuru | 12.09.2019
-     * @modified priyanka chillakuru | 23.12.2019
+     * This method is used to execute database queries for User Sign Up Email API.
+     * 
      * @param array $params_arr params_arr array to process query block.
      * @return array $return_arr returns response of query block.
      */
     public function create_user($params_arr = array())
     {
-        try
-        {
+        try {
             $result_arr = array();
-            if (!is_array($params_arr) || count($params_arr) == 0)
-            {
+            if (!is_array($params_arr) || count($params_arr) == 0) {
                 throw new Exception("Insert data not found.");
             }
-            if (isset($params_arr["first_name"]))
-            {
+            if (isset($params_arr["first_name"])) {
                 $this->db->set("vFirstName", $params_arr["first_name"]);
             }
-            if (isset($params_arr["last_name"]))
-            {
+            if (isset($params_arr["last_name"])) {
                 $this->db->set("vLastName", $params_arr["last_name"]);
             }
-            if (isset($params_arr["user_name"]))
-            {
+            if (isset($params_arr["user_name"])) {
                 $this->db->set("vUserName", $params_arr["user_name"]);
             }
-            if (isset($params_arr["email"]))
-            {
+            if (isset($params_arr["email"])) {
                 $this->db->set("vEmail", $params_arr["email"]);
             }
-            if (isset($params_arr["mobile_number"]))
-            {
+            if (isset($params_arr["mobile_number"])) {
                 $this->db->set("vMobileNo", $params_arr["mobile_number"]);
             }
-            if (isset($params_arr["user_profile"]) && !empty($params_arr["user_profile"]))
-            {
+            if (isset($params_arr["user_profile"]) && !empty($params_arr["user_profile"])) {
                 $this->db->set("vProfileImage", $params_arr["user_profile"]);
             }
-            if (isset($params_arr["dob"]))
-            {
+            if (isset($params_arr["dob"])) {
                 $this->db->set("dDob", $params_arr["dob"]);
             }
-            if (isset($params_arr["password"]))
-            {
+            if (isset($params_arr["password"])) {
                 $this->db->set("vPassword", $params_arr["password"]);
             }
-            if (isset($params_arr["address"]))
-            {
+            if (isset($params_arr["address"])) {
                 $this->db->set("tAddress", $params_arr["address"]);
             }
-            if (isset($params_arr["city"]))
-            {
+            if (isset($params_arr["city"])) {
                 $this->db->set("vCity", $params_arr["city"]);
             }
-            if (isset($params_arr["latitude"]))
-            {
+            if (isset($params_arr["latitude"])) {
                 $this->db->set("dLatitude", $params_arr["latitude"]);
             }
-            if (isset($params_arr["longitude"]))
-            {
+            if (isset($params_arr["longitude"])) {
                 $this->db->set("dLongitude", $params_arr["longitude"]);
             }
-            if (isset($params_arr["state_id"]))
-            {
+            if (isset($params_arr["state_id"])) {
                 $this->db->set("iStateId", $params_arr["state_id"]);
             }
-            if (isset($params_arr["state_name"]))
-            {
+            if (isset($params_arr["state_name"])) {
                 $this->db->set("vStateName", $params_arr["state_name"]);
             }
-            if (isset($params_arr["zipcode"]))
-            {
+            if (isset($params_arr["zipcode"])) {
                 $this->db->set("vZipCode", $params_arr["zipcode"]);
             }
             $this->db->set("eStatus", $params_arr["status"]);
             $this->db->set($this->db->protect("dtAddedAt"), $params_arr["_dtaddedat"], FALSE);
-            if (isset($params_arr["device_type"]))
-            {
+            if (isset($params_arr["device_type"])) {
                 $this->db->set("eDeviceType", $params_arr["device_type"]);
             }
-            if (isset($params_arr["device_model"]))
-            {
+            if (isset($params_arr["device_model"])) {
                 $this->db->set("vDeviceModel", $params_arr["device_model"]);
             }
-            if (isset($params_arr["device_os"]))
-            {
+            if (isset($params_arr["device_os"])) {
                 $this->db->set("vDeviceOS", $params_arr["device_os"]);
             }
-            if (isset($params_arr["device_token"]))
-            {
+            if (isset($params_arr["device_token"])) {
                 $this->db->set("vDeviceToken", $params_arr["device_token"]);
             }
             $this->db->set("eEmailVerified", $params_arr["_eemailverified"]);
-            if (isset($params_arr["email_confirmation_code"]))
-            {
+            if (isset($params_arr["email_confirmation_code"])) {
                 $this->db->set("vEmailVerificationCode", $params_arr["email_confirmation_code"]);
             }
             $this->db->set("vTermsConditionsVersion", $params_arr["_vtermsconditionsversion"]);
             $this->db->set("vPrivacyPolicyVersion", $params_arr["_vprivacypolicyversion"]);
             $this->db->insert("users");
             $insert_id = $this->db->insert_id();
-            if (!$insert_id)
-            {
+            if (!$insert_id) {
                 throw new Exception("Failure in insertion.");
             }
             $result_param = "insert_id";
             $result_arr[0][$result_param] = $insert_id;
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
 
         $this->db->_reset_all();
-        //echo $this->db->last_query();
+
         $return_arr["success"] = $success;
         $return_arr["message"] = $message;
         $return_arr["data"] = $result_arr;
@@ -640,8 +552,7 @@ class Users_model extends CI_Model
      */
     public function get_user_details($insert_id = '')
     {
-        try
-        {
+        try {
             $result_arr = array();
 
             $this->db->from("users AS u");
@@ -664,8 +575,7 @@ class Users_model extends CI_Model
             $this->db->select("u.eStatus AS u_status");
             $this->db->select("(concat(u.vFirstName,' ',u.vLastName)) AS email_user_name", FALSE);
             $this->db->select("u.eLogStatus AS u_log_status_updated");
-            if (isset($insert_id) && $insert_id != "")
-            {
+            if (isset($insert_id) && $insert_id != "") {
                 $this->db->where("u.iUserId =", $insert_id);
             }
 
@@ -673,14 +583,11 @@ class Users_model extends CI_Model
 
             $result_obj = $this->db->get();
             $result_arr = is_object($result_obj) ? $result_obj->result_array() : array();
-            if (!is_array($result_arr) || count($result_arr) == 0)
-            {
+            if (!is_array($result_arr) || count($result_arr) == 0) {
                 throw new Exception('No records found.');
             }
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -702,94 +609,72 @@ class Users_model extends CI_Model
      */
     public function create_user_v1($params_arr = array())
     {
-        try
-        {
+        try {
             $result_arr = array();
-            if (!is_array($params_arr) || count($params_arr) == 0)
-            {
+            if (!is_array($params_arr) || count($params_arr) == 0) {
                 throw new Exception("Insert data not found.");
             }
-            if (isset($params_arr["first_name"]))
-            {
+            if (isset($params_arr["first_name"])) {
                 $this->db->set("vFirstName", $params_arr["first_name"]);
             }
-            if (isset($params_arr["last_name"]))
-            {
+            if (isset($params_arr["last_name"])) {
                 $this->db->set("vLastName", $params_arr["last_name"]);
             }
-            if (isset($params_arr["user_name"]))
-            {
+            if (isset($params_arr["user_name"])) {
                 $this->db->set("vUserName", $params_arr["user_name"]);
             }
-            if (isset($params_arr["email"]))
-            {
+            if (isset($params_arr["email"])) {
                 $this->db->set("vEmail", $params_arr["email"]);
             }
-            if (isset($params_arr["mobile_number"]))
-            {
+            if (isset($params_arr["mobile_number"])) {
                 $this->db->set("vMobileNo", $params_arr["mobile_number"]);
             }
-            if (isset($params_arr["user_profile"]) && !empty($params_arr["user_profile"]))
-            {
+            if (isset($params_arr["user_profile"]) && !empty($params_arr["user_profile"])) {
                 $this->db->set("vProfileImage", $params_arr["user_profile"]);
             }
-            if (isset($params_arr["dob"]))
-            {
+            if (isset($params_arr["dob"])) {
                 $this->db->set("dDob", $params_arr["dob"]);
             }
-            if (isset($params_arr["password"]))
-            {
+            if (isset($params_arr["password"])) {
                 $this->db->set("vPassword", $params_arr["password"]);
             }
-            if (isset($params_arr["address"]))
-            {
+            if (isset($params_arr["address"])) {
                 $this->db->set("tAddress", $params_arr["address"]);
             }
-            if (isset($params_arr["city"]))
-            {
+            if (isset($params_arr["city"])) {
                 $this->db->set("vCity", $params_arr["city"]);
             }
-            if (isset($params_arr["latitude"]))
-            {
+            if (isset($params_arr["latitude"])) {
                 $this->db->set("dLatitude", $params_arr["latitude"]);
             }
-            if (isset($params_arr["longitude"]))
-            {
+            if (isset($params_arr["longitude"])) {
                 $this->db->set("dLongitude", $params_arr["longitude"]);
             }
-            if (isset($params_arr["state_id"]))
-            {
+            if (isset($params_arr["state_id"])) {
                 $this->db->set("iStateId", $params_arr["state_id"]);
             }
-            if (isset($params_arr["state_name"]))
-            {
+            if (isset($params_arr["state_name"])) {
                 $this->db->set("vStateName", $params_arr["state_name"]);
             }
-            if (isset($params_arr["zipcode"]))
-            {
+            if (isset($params_arr["zipcode"])) {
                 $this->db->set("vZipCode", $params_arr["zipcode"]);
             }
             $this->db->set("eStatus", $params_arr["status"]);
             $this->db->set($this->db->protect("dtAddedAt"), $params_arr["_dtaddedat"], FALSE);
-            if (isset($params_arr["device_type"]))
-            {
+            if (isset($params_arr["device_type"])) {
                 $this->db->set("eDeviceType", $params_arr["device_type"]);
             }
-            if (isset($params_arr["device_model"]))
-            {
+            if (isset($params_arr["device_model"])) {
                 $this->db->set("vDeviceModel", $params_arr["device_model"]);
             }
-            if (isset($params_arr["device_os"]))
-            {
+            if (isset($params_arr["device_os"])) {
                 $this->db->set("vDeviceOS", $params_arr["device_os"]);
             }
-            if (isset($params_arr["device_token"]))
-            {
+            if (isset($params_arr["device_token"])) {
                 $this->db->set("vDeviceToken", $params_arr["device_token"]);
             }
             $this->db->set($this->db->protect("vEmailVerificationCode"), $params_arr["_vemailverificationcode"], FALSE);
-            if (isset($params_arr["auth_token"]))
-            {
+            if (isset($params_arr["auth_token"])) {
                 $this->db->set("vAccessToken", $params_arr["auth_token"]);
             }
             $this->db->set("eEmailVerified", $params_arr["_eemailverified"]);
@@ -797,16 +682,13 @@ class Users_model extends CI_Model
             $this->db->set("vPrivacyPolicyVersion", $params_arr["_vprivacypolicyversion"]);
             $this->db->insert("users");
             $insert_id = $this->db->insert_id();
-            if (!$insert_id)
-            {
+            if (!$insert_id) {
                 throw new Exception("Failure in insertion.");
             }
             $result_param = "insert_id";
             $result_arr[0][$result_param] = $insert_id;
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -828,8 +710,7 @@ class Users_model extends CI_Model
      */
     public function get_user_details_v1($insert_id = '')
     {
-        try
-        {
+        try {
             $result_arr = array();
 
             $this->db->from("users AS u");
@@ -868,8 +749,7 @@ class Users_model extends CI_Model
             $this->db->select("u.vTermsConditionsVersion AS u_terms_conditions_version");
             $this->db->select("u.vPrivacyPolicyVersion AS u_privacy_policy_version");
             $this->db->select("u.eLogStatus AS u_log_status_updated");
-            if (isset($insert_id) && $insert_id != "")
-            {
+            if (isset($insert_id) && $insert_id != "") {
                 $this->db->where("u.iUserId =", $insert_id);
             }
 
@@ -877,14 +757,11 @@ class Users_model extends CI_Model
 
             $result_obj = $this->db->get();
             $result_arr = is_object($result_obj) ? $result_obj->result_array() : array();
-            if (!is_array($result_arr) || count($result_arr) == 0)
-            {
+            if (!is_array($result_arr) || count($result_arr) == 0) {
                 throw new Exception('No records found.');
             }
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -898,107 +775,84 @@ class Users_model extends CI_Model
     }
 
     /**
-     * create_user_social method is used to execute database queries for Social Sign Up API.
-     * @created CIT Dev Team
-     * @modified priyanka chillakuru | 23.12.2019
+     * This method is used to execute database queries for Social Sign Up API.
+     * 
      * @param array $params_arr params_arr array to process query block.
+     * 
      * @return array $return_arr returns response of query block.
      */
     public function create_user_social($params_arr = array())
     {
-        try
-        {
+        try {
             $result_arr = array();
-            if (!is_array($params_arr) || count($params_arr) == 0)
-            {
+            if (!is_array($params_arr) || count($params_arr) == 0) {
                 throw new Exception("Insert data not found.");
             }
-            if (isset($params_arr["first_name"]))
-            {
+            if (isset($params_arr["first_name"])) {
                 $this->db->set("vFirstName", $params_arr["first_name"]);
             }
-            if (isset($params_arr["last_name"]))
-            {
+            if (isset($params_arr["last_name"])) {
                 $this->db->set("vLastName", $params_arr["last_name"]);
             }
-            if (isset($params_arr["user_name"]))
-            {
+            if (isset($params_arr["user_name"])) {
                 $this->db->set("vUserName", $params_arr["user_name"]);
             }
-            if (isset($params_arr["email"]))
-            {
+            if (isset($params_arr["email"])) {
                 $this->db->set("vEmail", $params_arr["email"]);
             }
-            if (isset($params_arr["mobile_number"]))
-            {
+            if (isset($params_arr["mobile_number"])) {
                 $this->db->set("vMobileNo", $params_arr["mobile_number"]);
             }
-            if (isset($params_arr["user_profile"]) && !empty($params_arr["user_profile"]))
-            {
+            if (isset($params_arr["user_profile"]) && !empty($params_arr["user_profile"])) {
                 $this->db->set("vProfileImage", $params_arr["user_profile"]);
             }
-            if (isset($params_arr["dob"]))
-            {
+            if (isset($params_arr["dob"])) {
                 $this->db->set("dDob", $params_arr["dob"]);
             }
-            if (isset($params_arr["address"]))
-            {
+            if (isset($params_arr["address"])) {
                 $this->db->set("tAddress", $params_arr["address"]);
             }
-            if (isset($params_arr["city"]))
-            {
+            if (isset($params_arr["city"])) {
                 $this->db->set("vCity", $params_arr["city"]);
             }
-            if (isset($params_arr["latitude"]))
-            {
+            if (isset($params_arr["latitude"])) {
                 $this->db->set("dLatitude", $params_arr["latitude"]);
             }
-            if (isset($params_arr["longitude"]))
-            {
+            if (isset($params_arr["longitude"])) {
                 $this->db->set("dLongitude", $params_arr["longitude"]);
             }
-            if (isset($params_arr["state_id"]))
-            {
+            if (isset($params_arr["state_id"])) {
                 $this->db->set("iStateId", $params_arr["state_id"]);
             }
-            if (isset($params_arr["state_name"]))
-            {
+            if (isset($params_arr["state_name"])) {
                 $this->db->set("vStateName", $params_arr["state_name"]);
             }
-            if (isset($params_arr["zipcode"]))
-            {
+            if (isset($params_arr["zipcode"])) {
                 $this->db->set("vZipCode", $params_arr["zipcode"]);
             }
             $this->db->set("eStatus", $params_arr["status"]);
             $this->db->set($this->db->protect("dtAddedAt"), $params_arr["_dtaddedat"], FALSE);
             $this->db->set($this->db->protect("dtUpdatedAt"), $params_arr["_dtupdatedat"], FALSE);
-            if (isset($params_arr["device_type"]))
-            {
+            if (isset($params_arr["device_type"])) {
                 $this->db->set("eDeviceType", $params_arr["device_type"]);
             }
-            if (isset($params_arr["device_model"]))
-            {
+            if (isset($params_arr["device_model"])) {
                 $this->db->set("vDeviceModel", $params_arr["device_model"]);
             }
-            if (isset($params_arr["device_os"]))
-            {
+            if (isset($params_arr["device_os"])) {
                 $this->db->set("vDeviceOS", $params_arr["device_os"]);
             }
-            if (isset($params_arr["device_token"]))
-            {
+            if (isset($params_arr["device_token"])) {
                 $this->db->set("vDeviceToken", $params_arr["device_token"]);
             }
             $this->db->set($this->db->protect("vEmailVerificationCode"), $params_arr["_vemailverificationcode"], FALSE);
-            if (isset($params_arr["auth_token"]))
-            {
+            if (isset($params_arr["auth_token"])) {
                 $this->db->set("vAccessToken", $params_arr["auth_token"]);
             }
-            if (isset($params_arr["social_login_type"]))
-            {
+            if (isset($params_arr["social_login_type"])) {
                 $this->db->set("eSocialLoginType", $params_arr["social_login_type"]);
             }
-            if (isset($params_arr["social_login_id"]))
-            {
+            if (isset($params_arr["social_login_id"])) {
                 $this->db->set("vSocialLoginId", $params_arr["social_login_id"]);
             }
             $this->db->set("eEmailVerified", $params_arr["_eemailverified"]);
@@ -1006,16 +860,21 @@ class Users_model extends CI_Model
             $this->db->set("vPrivacyPolicyVersion", $params_arr["_vprivacypolicyversion"]);
             $this->db->insert("users");
             $insert_id = $this->db->insert_id();
-            if (!$insert_id)
-            {
+            if (!$insert_id) {
                 throw new Exception("Failure in insertion.");
             }
+
+            $db_error = $this->db->error();
+            if ($db_error['code']) {
+                throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+            }
+
             $result_param = "insert_id";
             $result_arr[0][$result_param] = $insert_id;
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
+            $params_arr['db_query'] = $this->db->last_query();
+            $this->general->apiLogger($params_arr, $e);
             $success = 0;
             $message = $e->getMessage();
         }
@@ -1025,20 +884,20 @@ class Users_model extends CI_Model
         $return_arr["success"] = $success;
         $return_arr["message"] = $message;
         $return_arr["data"] = $result_arr;
+
         return $return_arr;
     }
 
     /**
-     * get_user_details_v1_v1 method is used to execute database queries for Social Sign Up API.
-     * @created CIT Dev Team
-     * @modified priyanka chillakuru | 23.12.2019
+     * This method is used to execute database queries for Social Sign Up API.
+     * 
      * @param string $insert_id insert_id is used to process query block.
+     * 
      * @return array $return_arr returns response of query block.
      */
     public function get_user_details_v1_v1($insert_id = '')
     {
-        try
-        {
+        try {
             $result_arr = array();
 
             $this->db->from("users AS u");
@@ -1077,8 +936,7 @@ class Users_model extends CI_Model
             $this->db->select("u.vTermsConditionsVersion AS terms_conditions_version");
             $this->db->select("u.vPrivacyPolicyVersion AS privacy_policy_version");
             $this->db->select("u.eLogStatus AS u_log_status_updated");
-            if (isset($insert_id) && $insert_id != "")
-            {
+            if (isset($insert_id) && $insert_id != "") {
                 $this->db->where("u.iUserId =", $insert_id);
             }
 
@@ -1086,23 +944,28 @@ class Users_model extends CI_Model
 
             $result_obj = $this->db->get();
             $result_arr = is_object($result_obj) ? $result_obj->result_array() : array();
-            if (!is_array($result_arr) || count($result_arr) == 0)
-            {
+            
+            $db_error = $this->db->error();
+            if ($db_error['code']) {
+                throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+            }
+
+            if (!is_array($result_arr) || count($result_arr) == 0) {
                 throw new Exception('No records found.');
             }
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        }  catch (Exception $e) {
+            $params_arr['db_query'] = $this->db->last_query();
+            $this->general->apiLogger($params_arr, $e);
             $success = 0;
             $message = $e->getMessage();
         }
-
         $this->db->_reset_all();
         //echo $this->db->last_query();
         $return_arr["success"] = $success;
         $return_arr["message"] = $message;
         $return_arr["data"] = $result_arr;
+
         return $return_arr;
     }
 
@@ -1115,8 +978,7 @@ class Users_model extends CI_Model
      */
     public function check_user_exists_or_not($email = '')
     {
-        try
-        {
+        try {
             $result_arr = array();
 
             $this->db->from("users AS u");
@@ -1128,8 +990,7 @@ class Users_model extends CI_Model
             $this->db->select("u.vFirstName AS u_first_name");
             $this->db->select("u.vLastName AS u_last_name");
             $this->db->select("(concat(u.vFirstName,\" \",u.vLastName)) AS email_user_name", FALSE);
-            if (isset($email) && $email != "")
-            {
+            if (isset($email) && $email != "") {
                 $this->db->where("u.vEmail =", $email);
             }
             $this->db->where_in("u.eEmailVerified", array('No'));
@@ -1139,14 +1000,11 @@ class Users_model extends CI_Model
 
             $result_obj = $this->db->get();
             $result_arr = is_object($result_obj) ? $result_obj->result_array() : array();
-            if (!is_array($result_arr) || count($result_arr) == 0)
-            {
+            if (!is_array($result_arr) || count($result_arr) == 0) {
                 throw new Exception('No records found.');
             }
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -1169,29 +1027,23 @@ class Users_model extends CI_Model
      */
     public function update_email_verification_code($params_arr = array(), $where_arr = array())
     {
-        try
-        {
+        try {
             $result_arr = array();
-            if (isset($where_arr["email"]) && $where_arr["email"] != "")
-            {
+            if (isset($where_arr["email"]) && $where_arr["email"] != "") {
                 $this->db->where("vEmail =", $where_arr["email"]);
             }
-            if (isset($params_arr["email_confirmation_code"]))
-            {
+            if (isset($params_arr["email_confirmation_code"])) {
                 $this->db->set("vEmailVerificationCode", $params_arr["email_confirmation_code"]);
             }
             $res = $this->db->update("users");
             $affected_rows = $this->db->affected_rows();
-            if (!$res || $affected_rows == -1)
-            {
+            if (!$res || $affected_rows == -1) {
                 throw new Exception("Failure in updation.");
             }
             $result_param = "affected_rows";
             $result_arr[0][$result_param] = $affected_rows;
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -1205,17 +1057,16 @@ class Users_model extends CI_Model
     }
 
     /**
-     * get_user_login_details method is used to execute database queries for User Login Email API.
-     * @created priyanka chillakuru | 13.09.2019
-     * @modified priyanka chillakuru | 23.12.2019
+     * This method is used to execute database queries for User Login Email API.
+     * 
      * @param string $auth_token auth_token is used to process query block.
      * @param string $where_clause where_clause is used to process query block.
+     * 
      * @return array $return_arr returns response of query block.
      */
     public function get_user_login_details($auth_token = '', $where_clause = '')
     {
-        try
-        {
+        try {
             $result_arr = array();
 
             $this->db->from("users AS u");
@@ -1244,7 +1095,7 @@ class Users_model extends CI_Model
             $this->db->select("u.eStatus AS u_status");
             $this->db->select("u.dtAddedAt AS u_added_at");
             $this->db->select("u.dtUpdatedAt AS u_updated_at");
-            $this->db->select("(".$this->db->escape("".$auth_token."").") AS auth_token1", FALSE);
+            $this->db->select("(" . $this->db->escape("" . $auth_token . "") . ") AS auth_token1", FALSE);
             $this->db->select("u.eSocialLoginType AS u_social_login_type");
             $this->db->select("u.vSocialLoginId AS u_social_login_id");
             $this->db->select("u.ePushNotify AS u_push_notify");
@@ -1254,20 +1105,25 @@ class Users_model extends CI_Model
             $this->db->select("u.vTermsConditionsVersion AS u_terms_conditions_version");
             $this->db->select("u.vPrivacyPolicyVersion AS u_privacy_policy_version");
             $this->db->select("u.eLogStatus AS u_log_status_updated");
-            $this->db->where("".$where_clause."", FALSE, FALSE);
+            $this->db->where("" . $where_clause . "", FALSE, FALSE);
 
             $this->db->limit(1);
 
             $result_obj = $this->db->get();
             $result_arr = is_object($result_obj) ? $result_obj->result_array() : array();
-            if (!is_array($result_arr) || count($result_arr) == 0)
-            {
+
+            $db_error = $this->db->error();
+            if ($db_error['code']) {
+                throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+            }
+
+            if (!is_array($result_arr) || count($result_arr) == 0) {
                 throw new Exception('No records found.');
             }
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
+            $params_arr['db_query'] = $this->db->last_query();
+            $this->general->apiLogger($params_arr, $e);
             $success = 0;
             $message = $e->getMessage();
         }
@@ -1277,55 +1133,47 @@ class Users_model extends CI_Model
         $return_arr["success"] = $success;
         $return_arr["message"] = $message;
         $return_arr["data"] = $result_arr;
+
         return $return_arr;
     }
 
     /**
-     * update_device_details method is used to execute database queries for User Login Email API.
-     * @created priyanka chillakuru | 13.09.2019
-     * @modified priyanka chillakuru | 13.09.2019
+     * This method is used to execute database queries for User Login Email API.
+     * 
      * @param array $params_arr params_arr array to process query block.
      * @param array $where_arr where_arr are used to process where condition(s).
+     * 
      * @return array $return_arr returns response of query block.
      */
     public function update_device_details($params_arr = array(), $where_arr = array())
     {
-        try
-        {
+        try {
             $result_arr = array();
-            if (isset($where_arr["u_user_id"]) && $where_arr["u_user_id"] != "")
-            {
+            if (isset($where_arr["u_user_id"]) && $where_arr["u_user_id"] != "") {
                 $this->db->where("iUserId =", $where_arr["u_user_id"]);
             }
-            if (isset($params_arr["device_type"]))
-            {
+            if (isset($params_arr["device_type"])) {
                 $this->db->set("eDeviceType", $params_arr["device_type"]);
             }
-            if (isset($params_arr["device_model"]))
-            {
+            if (isset($params_arr["device_model"])) {
                 $this->db->set("vDeviceModel", $params_arr["device_model"]);
             }
-            if (isset($params_arr["device_os"]))
-            {
+            if (isset($params_arr["device_os"])) {
                 $this->db->set("vDeviceOS", $params_arr["device_os"]);
             }
-            if (isset($params_arr["device_token"]))
-            {
+            if (isset($params_arr["device_token"])) {
                 $this->db->set("vDeviceToken", $params_arr["device_token"]);
             }
             $this->db->set($this->db->protect("vAccessToken"), $params_arr["_vaccesstoken"], FALSE);
             $res = $this->db->update("users");
             $affected_rows = $this->db->affected_rows();
-            if (!$res || $affected_rows == -1)
-            {
+            if (!$res || $affected_rows == -1) {
                 throw new Exception("Failure in updation.");
             }
             $result_param = "affected_rows";
             $result_arr[0][$result_param] = $affected_rows;
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -1348,8 +1196,7 @@ class Users_model extends CI_Model
      */
     public function get_user_login_details_v1($auth_token = '', $where_clause = '')
     {
-        try
-        {
+        try {
             $result_arr = array();
 
             $this->db->from("users AS u");
@@ -1378,7 +1225,7 @@ class Users_model extends CI_Model
             $this->db->select("u.eStatus AS u_status");
             $this->db->select("u.dtAddedAt AS u_added_at");
             $this->db->select("u.dtUpdatedAt AS u_updated_at");
-            $this->db->select("(".$this->db->escape("".$auth_token."").") AS auth_token1", FALSE);
+            $this->db->select("(" . $this->db->escape("" . $auth_token . "") . ") AS auth_token1", FALSE);
             $this->db->select("u.eSocialLoginType AS u_social_login_type");
             $this->db->select("u.vSocialLoginId AS u_social_login_id");
             $this->db->select("u.ePushNotify AS u_push_notify");
@@ -1388,20 +1235,17 @@ class Users_model extends CI_Model
             $this->db->select("u.vTermsConditionsVersion AS u_terms_conditions_version");
             $this->db->select("u.vPrivacyPolicyVersion AS u_privacy_policy_version");
             $this->db->select("u.eLogStatus AS u_log_status_updated");
-            $this->db->where("".$where_clause."", FALSE, FALSE);
+            $this->db->where("" . $where_clause . "", FALSE, FALSE);
 
             $this->db->limit(1);
 
             $result_obj = $this->db->get();
             $result_arr = is_object($result_obj) ? $result_obj->result_array() : array();
-            if (!is_array($result_arr) || count($result_arr) == 0)
-            {
+            if (!is_array($result_arr) || count($result_arr) == 0) {
                 throw new Exception('No records found.');
             }
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -1424,42 +1268,33 @@ class Users_model extends CI_Model
      */
     public function update_device_details_v1($params_arr = array(), $where_arr = array())
     {
-        try
-        {
+        try {
             $result_arr = array();
-            if (isset($where_arr["u_user_id"]) && $where_arr["u_user_id"] != "")
-            {
+            if (isset($where_arr["u_user_id"]) && $where_arr["u_user_id"] != "") {
                 $this->db->where("iUserId =", $where_arr["u_user_id"]);
             }
-            if (isset($params_arr["device_type"]))
-            {
+            if (isset($params_arr["device_type"])) {
                 $this->db->set("eDeviceType", $params_arr["device_type"]);
             }
-            if (isset($params_arr["device_model"]))
-            {
+            if (isset($params_arr["device_model"])) {
                 $this->db->set("vDeviceModel", $params_arr["device_model"]);
             }
-            if (isset($params_arr["device_os"]))
-            {
+            if (isset($params_arr["device_os"])) {
                 $this->db->set("vDeviceOS", $params_arr["device_os"]);
             }
-            if (isset($params_arr["device_token"]))
-            {
+            if (isset($params_arr["device_token"])) {
                 $this->db->set("vDeviceToken", $params_arr["device_token"]);
             }
             $this->db->set($this->db->protect("vAccessToken"), $params_arr["_vaccesstoken"], FALSE);
             $res = $this->db->update("users");
             $affected_rows = $this->db->affected_rows();
-            if (!$res || $affected_rows == -1)
-            {
+            if (!$res || $affected_rows == -1) {
                 throw new Exception("Failure in updation.");
             }
             $result_param = "affected_rows";
             $result_arr[0][$result_param] = $affected_rows;
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -1473,17 +1308,16 @@ class Users_model extends CI_Model
     }
 
     /**
-     * get_user_login_details_v1_v1 method is used to execute database queries for Social Login API.
-     * @created CIT Dev Team
-     * @modified priyanka chillakuru | 23.12.2019
+     * This method is used to execute database queries for Social Login API.
+     * 
      * @param string $auth_token auth_token is used to process query block.
      * @param string $where_clause where_clause is used to process query block.
+     * 
      * @return array $return_arr returns response of query block.
      */
     public function get_user_login_details_v1_v1($auth_token = '', $where_clause = '')
     {
-        try
-        {
+        try {
             $result_arr = array();
 
             $this->db->from("users AS u");
@@ -1512,7 +1346,7 @@ class Users_model extends CI_Model
             $this->db->select("u.eStatus AS u_status");
             $this->db->select("u.dtAddedAt AS u_added_at");
             $this->db->select("u.dtUpdatedAt AS u_updated_at");
-            $this->db->select("(".$this->db->escape("".$auth_token."").") AS auth_token1", FALSE);
+            $this->db->select("(" . $this->db->escape("" . $auth_token . "") . ") AS auth_token1", FALSE);
             $this->db->select("u.eSocialLoginType AS u_social_login_type");
             $this->db->select("u.vSocialLoginId AS u_social_login_id");
             $this->db->select("u.ePushNotify AS u_push_notify");
@@ -1522,20 +1356,24 @@ class Users_model extends CI_Model
             $this->db->select("u.vTermsConditionsVersion AS u_terms_conditions_version");
             $this->db->select("u.vPrivacyPolicyVersion AS u_privacy_policy_version");
             $this->db->select("u.eLogStatus AS u_log_status_updated");
-            $this->db->where("".$where_clause."", FALSE, FALSE);
+            $this->db->where("" . $where_clause . "", FALSE, FALSE);
 
             $this->db->limit(1);
 
             $result_obj = $this->db->get();
             $result_arr = is_object($result_obj) ? $result_obj->result_array() : array();
-            if (!is_array($result_arr) || count($result_arr) == 0)
-            {
+            
+            $db_error = $this->db->error();
+            if ($db_error['code']) {
+                throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+            }
+            if (!is_array($result_arr) || count($result_arr) == 0) {
                 throw new Exception('No records found.');
             }
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
+            $params_arr['db_query'] = $this->db->last_query();
+            $this->general->apiLogger($params_arr, $e);
             $success = 0;
             $message = $e->getMessage();
         }
@@ -1545,55 +1383,53 @@ class Users_model extends CI_Model
         $return_arr["success"] = $success;
         $return_arr["message"] = $message;
         $return_arr["data"] = $result_arr;
+        
         return $return_arr;
     }
 
     /**
-     * update_device_details_v1_v1 method is used to execute database queries for Social Login API.
-     * @created CIT Dev Team
-     * @modified priyanka chillakuru | 13.09.2019
+     * This method is used to execute database queries for Social Login API.
+     * 
      * @param array $params_arr params_arr array to process query block.
      * @param array $where_arr where_arr are used to process where condition(s).
+     * 
      * @return array $return_arr returns response of query block.
      */
     public function update_device_details_v1_v1($params_arr = array(), $where_arr = array())
     {
-        try
-        {
+        try {
             $result_arr = array();
-            if (isset($where_arr["u_user_id"]) && $where_arr["u_user_id"] != "")
-            {
+            if (isset($where_arr["u_user_id"]) && $where_arr["u_user_id"] != "") {
                 $this->db->where("iUserId =", $where_arr["u_user_id"]);
             }
-            if (isset($params_arr["device_type"]))
-            {
+            if (isset($params_arr["device_type"])) {
                 $this->db->set("eDeviceType", $params_arr["device_type"]);
             }
-            if (isset($params_arr["device_model"]))
-            {
+            if (isset($params_arr["device_model"])) {
                 $this->db->set("vDeviceModel", $params_arr["device_model"]);
             }
-            if (isset($params_arr["device_os"]))
-            {
+            if (isset($params_arr["device_os"])) {
                 $this->db->set("vDeviceOS", $params_arr["device_os"]);
             }
-            if (isset($params_arr["device_token"]))
-            {
+            if (isset($params_arr["device_token"])) {
                 $this->db->set("vDeviceToken", $params_arr["device_token"]);
             }
             $this->db->set($this->db->protect("vAccessToken"), $params_arr["_vaccesstoken"], FALSE);
             $res = $this->db->update("users");
+            $db_error = $this->db->error();
+            if ($db_error['code']) {
+                throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+            }
             $affected_rows = $this->db->affected_rows();
-            if (!$res || $affected_rows == -1)
-            {
+            if (!$res || $affected_rows == -1) {
                 throw new Exception("Failure in updation.");
             }
             $result_param = "affected_rows";
             $result_arr[0][$result_param] = $affected_rows;
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
+            $params_arr['db_query'] = $this->db->last_query();
+            $this->general->apiLogger($params_arr, $e);
             $success = 0;
             $message = $e->getMessage();
         }
@@ -1603,6 +1439,7 @@ class Users_model extends CI_Model
         $return_arr["success"] = $success;
         $return_arr["message"] = $message;
         $return_arr["data"] = $result_arr;
+
         return $return_arr;
     }
 
@@ -1615,8 +1452,7 @@ class Users_model extends CI_Model
      */
     public function check_email_exists($email = '')
     {
-        try
-        {
+        try {
             $result_arr = array();
 
             $this->db->from("users AS u");
@@ -1624,8 +1460,7 @@ class Users_model extends CI_Model
             $this->db->select("u.eStatus AS u_status");
             $this->db->select("(concat(u.vFirstName,\" \",u.vLastName)) AS email_username", FALSE);
             $this->db->select("u.vEmail AS u_email");
-            if (isset($email) && $email != "")
-            {
+            if (isset($email) && $email != "") {
                 $this->db->where("u.vEmail =", $email);
             }
 
@@ -1633,14 +1468,11 @@ class Users_model extends CI_Model
 
             $result_obj = $this->db->get();
             $result_arr = is_object($result_obj) ? $result_obj->result_array() : array();
-            if (!is_array($result_arr) || count($result_arr) == 0)
-            {
+            if (!is_array($result_arr) || count($result_arr) == 0) {
                 throw new Exception('No records found.');
             }
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -1663,30 +1495,24 @@ class Users_model extends CI_Model
      */
     public function update_reset_key($params_arr = array(), $where_arr = array())
     {
-        try
-        {
+        try {
             $result_arr = array();
-            if (isset($where_arr["email"]) && $where_arr["email"] != "")
-            {
+            if (isset($where_arr["email"]) && $where_arr["email"] != "") {
                 $this->db->where("vEmail =", $where_arr["email"]);
             }
-            if (isset($params_arr["reset_key"]))
-            {
+            if (isset($params_arr["reset_key"])) {
                 $this->db->set("vResetPasswordCode", $params_arr["reset_key"]);
             }
             $this->db->set($this->db->protect("dtUpdatedAt"), $params_arr["_dtupdatedat"], FALSE);
             $res = $this->db->update("users");
             $affected_rows = $this->db->affected_rows();
-            if (!$res || $affected_rows == -1)
-            {
+            if (!$res || $affected_rows == -1) {
                 throw new Exception("Failure in updation.");
             }
             $result_param = "affected_rows";
             $result_arr[0][$result_param] = $affected_rows;
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -1709,31 +1535,25 @@ class Users_model extends CI_Model
      */
     public function reset_password($params_arr = array(), $where_arr = array())
     {
-        try
-        {
+        try {
             $result_arr = array();
-            if (isset($where_arr["reset_key"]) && $where_arr["reset_key"] != "")
-            {
+            if (isset($where_arr["reset_key"]) && $where_arr["reset_key"] != "") {
                 $this->db->where("vResetPasswordCode =", $where_arr["reset_key"]);
             }
-            if (isset($params_arr["new_password"]))
-            {
+            if (isset($params_arr["new_password"])) {
                 $this->db->set("vPassword", $params_arr["new_password"]);
             }
             $this->db->set($this->db->protect("vResetPasswordCode"), $params_arr["_vresetpasswordcode"], FALSE);
             $this->db->set($this->db->protect("dtUpdatedAt"), $params_arr["_dtupdatedat"], FALSE);
             $res = $this->db->update("users");
             $affected_rows = $this->db->affected_rows();
-            if (!$res || $affected_rows == -1)
-            {
+            if (!$res || $affected_rows == -1) {
                 throw new Exception("Failure in updation.");
             }
             $result_param = "affected_rows";
             $result_arr[0][$result_param] = $affected_rows;
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -1755,8 +1575,7 @@ class Users_model extends CI_Model
      */
     public function get_user_by_mobile_number($mobile_number = '')
     {
-        try
-        {
+        try {
             $result_arr = array();
 
             $this->db->from("users AS u");
@@ -1769,8 +1588,7 @@ class Users_model extends CI_Model
             $this->db->select("u.vMobileNo AS u_mobile_no");
             $this->db->select("u.eStatus AS u_status");
             $this->db->select("(concat(u.vFirstName,\"\",u.vLastName)) AS msg_user_name", FALSE);
-            if (isset($mobile_number) && $mobile_number != "")
-            {
+            if (isset($mobile_number) && $mobile_number != "") {
                 $this->db->where("u.vMobileNo =", $mobile_number);
             }
 
@@ -1778,14 +1596,11 @@ class Users_model extends CI_Model
 
             $result_obj = $this->db->get();
             $result_arr = is_object($result_obj) ? $result_obj->result_array() : array();
-            if (!is_array($result_arr) || count($result_arr) == 0)
-            {
+            if (!is_array($result_arr) || count($result_arr) == 0) {
                 throw new Exception('No records found.');
             }
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -1808,29 +1623,23 @@ class Users_model extends CI_Model
      */
     public function update_reset_key_phone($params_arr = array(), $where_arr = array())
     {
-        try
-        {
+        try {
             $result_arr = array();
-            if (isset($where_arr["mobile_number"]) && $where_arr["mobile_number"] != "")
-            {
+            if (isset($where_arr["mobile_number"]) && $where_arr["mobile_number"] != "") {
                 $this->db->where("vMobileNo =", $where_arr["mobile_number"]);
             }
-            if (isset($params_arr["reset_key"]))
-            {
+            if (isset($params_arr["reset_key"])) {
                 $this->db->set("vResetPasswordCode", $params_arr["reset_key"]);
             }
             $res = $this->db->update("users");
             $affected_rows = $this->db->affected_rows();
-            if (!$res || $affected_rows == -1)
-            {
+            if (!$res || $affected_rows == -1) {
                 throw new Exception("Failure in updation.");
             }
             $result_param = "affected_rows";
             $result_arr[0][$result_param] = $affected_rows;
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -1853,19 +1662,16 @@ class Users_model extends CI_Model
      */
     public function check_mobile_number($mobile_number = '', $reset_key = '')
     {
-        try
-        {
+        try {
             $result_arr = array();
 
             $this->db->from("users AS u");
 
             $this->db->select("u.iUserId AS u_user_id");
-            if (isset($mobile_number) && $mobile_number != "")
-            {
+            if (isset($mobile_number) && $mobile_number != "") {
                 $this->db->where("u.vMobileNo =", $mobile_number);
             }
-            if (isset($reset_key) && $reset_key != "")
-            {
+            if (isset($reset_key) && $reset_key != "") {
                 $this->db->where("u.vResetPasswordCode =", $reset_key);
             }
 
@@ -1873,14 +1679,11 @@ class Users_model extends CI_Model
 
             $result_obj = $this->db->get();
             $result_arr = is_object($result_obj) ? $result_obj->result_array() : array();
-            if (!is_array($result_arr) || count($result_arr) == 0)
-            {
+            if (!is_array($result_arr) || count($result_arr) == 0) {
                 throw new Exception('No records found.');
             }
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -1903,38 +1706,30 @@ class Users_model extends CI_Model
      */
     public function update_user_password($params_arr = array(), $where_arr = array())
     {
-        try
-        {
+        try {
             $result_arr = array();
-            if (isset($where_arr["u_user_id"]) && $where_arr["u_user_id"] != "")
-            {
+            if (isset($where_arr["u_user_id"]) && $where_arr["u_user_id"] != "") {
                 $this->db->where("iUserId =", $where_arr["u_user_id"]);
             }
-            if (isset($where_arr["mobile_number"]) && $where_arr["mobile_number"] != "")
-            {
+            if (isset($where_arr["mobile_number"]) && $where_arr["mobile_number"] != "") {
                 $this->db->where("vMobileNo =", $where_arr["mobile_number"]);
             }
-            if (isset($where_arr["reset_key"]) && $where_arr["reset_key"] != "")
-            {
+            if (isset($where_arr["reset_key"]) && $where_arr["reset_key"] != "") {
                 $this->db->where("vResetPasswordCode =", $where_arr["reset_key"]);
             }
-            if (isset($params_arr["new_password"]))
-            {
+            if (isset($params_arr["new_password"])) {
                 $this->db->set("vPassword", $params_arr["new_password"]);
             }
             $this->db->set($this->db->protect("vResetPasswordCode"), $params_arr["_vresetpasswordcode"], FALSE);
             $res = $this->db->update("users");
             $affected_rows = $this->db->affected_rows();
-            if (!$res || $affected_rows == -1)
-            {
+            if (!$res || $affected_rows == -1) {
                 throw new Exception("Failure in updation.");
             }
             $result_param = "affected_rows";
             $result_arr[0][$result_param] = $affected_rows;
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -1957,87 +1752,68 @@ class Users_model extends CI_Model
      */
     public function update_profile($params_arr = array(), $where_arr = array())
     {
-        try
-        {
+        try {
             $result_arr = array();
 
             $this->db->start_cache();
-            if (isset($where_arr["user_id"]) && $where_arr["user_id"] != "")
-            {
+            if (isset($where_arr["user_id"]) && $where_arr["user_id"] != "") {
                 $this->db->where("iUserId =", $where_arr["user_id"]);
             }
             $this->db->where_in("eStatus", array('Active'));
             $this->db->stop_cache();
-            if (isset($params_arr["first_name"]))
-            {
+            if (isset($params_arr["first_name"])) {
                 $this->db->set("vFirstName", $params_arr["first_name"]);
             }
-            if (isset($params_arr["last_name"]))
-            {
+            if (isset($params_arr["last_name"])) {
                 $this->db->set("vLastName", $params_arr["last_name"]);
             }
-            if (isset($params_arr["user_profile"]) && !empty($params_arr["user_profile"]))
-            {
+            if (isset($params_arr["user_profile"]) && !empty($params_arr["user_profile"])) {
                 $this->db->set("vProfileImage", $params_arr["user_profile"]);
             }
 
-            if (isset($params_arr["delete_user_profile"]) && !empty($params_arr["delete_user_profile"]))
-            {
+            if (isset($params_arr["delete_user_profile"]) && !empty($params_arr["delete_user_profile"])) {
                 $this->db->set("vProfileImage", " ");
             }
-            if (isset($params_arr["dob"]))
-            {
+            if (isset($params_arr["dob"])) {
                 $this->db->set("dDob", $params_arr["dob"]);
             }
-            if (isset($params_arr["address"]))
-            {
+            if (isset($params_arr["address"])) {
                 $this->db->set("tAddress", $params_arr["address"]);
             }
-            if (isset($params_arr["city"]))
-            {
+            if (isset($params_arr["city"])) {
                 $this->db->set("vCity", $params_arr["city"]);
             }
-            if (isset($params_arr["latitude"]))
-            {
+            if (isset($params_arr["latitude"])) {
                 $this->db->set("dLatitude", $params_arr["latitude"]);
             }
-            if (isset($params_arr["longitude"]))
-            {
+            if (isset($params_arr["longitude"])) {
                 $this->db->set("dLongitude", $params_arr["longitude"]);
             }
-            if (isset($params_arr["state_id"]))
-            {
+            if (isset($params_arr["state_id"])) {
                 $this->db->set("iStateId", $params_arr["state_id"]);
             }
-            if (isset($params_arr["state_name"]))
-            {
+            if (isset($params_arr["state_name"])) {
                 $this->db->set("vStateName", $params_arr["state_name"]);
             }
-            if (isset($params_arr["zipcode"]))
-            {
+            if (isset($params_arr["zipcode"])) {
                 $this->db->set("vZipCode", $params_arr["zipcode"]);
             }
             $this->db->set($this->db->protect("dtUpdatedAt"), $params_arr["_dtupdatedat"], FALSE);
-            if (isset($params_arr["user_name"]))
-            {
+            if (isset($params_arr["user_name"])) {
                 $this->db->set("vUserName", $params_arr["user_name"]);
             }
-            if (isset($params_arr["mobile_number"]))
-            {
+            if (isset($params_arr["mobile_number"])) {
                 $this->db->set("vMobileNo", $params_arr["mobile_number"]);
             }
             $res = $this->db->update("users");
             $affected_rows = $this->db->affected_rows();
-            if (!$res || $affected_rows == -1)
-            {
+            if (!$res || $affected_rows == -1) {
                 throw new Exception("Failure in updation.");
             }
             $result_param = "affected_rows";
             $result_arr[0][$result_param] = $affected_rows;
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -2059,8 +1835,7 @@ class Users_model extends CI_Model
      */
     public function get_updated_details($user_id = '')
     {
-        try
-        {
+        try {
             $result_arr = array();
 
             $this->db->from("users AS u");
@@ -2099,8 +1874,7 @@ class Users_model extends CI_Model
             $this->db->select("u.vTermsConditionsVersion AS u_terms_conditions_version");
             $this->db->select("u.vPrivacyPolicyVersion AS u_privacy_policy_version");
             $this->db->select("u.eLogStatus AS u_log_status_updated");
-            if (isset($user_id) && $user_id != "")
-            {
+            if (isset($user_id) && $user_id != "") {
                 $this->db->where("u.iUserId =", $user_id);
             }
 
@@ -2108,14 +1882,11 @@ class Users_model extends CI_Model
 
             $result_obj = $this->db->get();
             $result_arr = is_object($result_obj) ? $result_obj->result_array() : array();
-            if (!is_array($result_arr) || count($result_arr) == 0)
-            {
+            if (!is_array($result_arr) || count($result_arr) == 0) {
                 throw new Exception('No records found.');
             }
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -2138,11 +1909,9 @@ class Users_model extends CI_Model
      */
     public function update_email_verfied_status($params_arr = array(), $where_arr = array())
     {
-        try
-        {
+        try {
             $result_arr = array();
-            if (isset($where_arr["user_id"]) && $where_arr["user_id"] != "")
-            {
+            if (isset($where_arr["user_id"]) && $where_arr["user_id"] != "") {
                 $this->db->where("iUserId =", $where_arr["user_id"]);
             }
 
@@ -2152,16 +1921,13 @@ class Users_model extends CI_Model
             $this->db->set($this->db->protect("dtDeletedAt"), $params_arr["_dtdeletedat"], FALSE);
             $res = $this->db->update("users");
             $affected_rows = $this->db->affected_rows();
-            if (!$res || $affected_rows == -1)
-            {
+            if (!$res || $affected_rows == -1) {
                 throw new Exception("Failure in updation.");
             }
             $result_param = "affected_rows";
             $result_arr[0][$result_param] = $affected_rows;
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -2184,32 +1950,26 @@ class Users_model extends CI_Model
      */
     public function update_transaction_data($params_arr = array(), $where_arr = array())
     {
-        try
-        {
+        try {
             $result_arr = array();
-            if (isset($where_arr["user_id"]) && $where_arr["user_id"] != "")
-            {
+            if (isset($where_arr["user_id"]) && $where_arr["user_id"] != "") {
                 $this->db->where("iUserId =", $where_arr["user_id"]);
             }
             $this->db->where_in("eStatus", array('Active'));
 
             $this->db->set("eOneTimeTransaction", $params_arr["_eonetimetransaction"]);
-            if (isset($params_arr["one_time_transaction_data"]))
-            {
+            if (isset($params_arr["one_time_transaction_data"])) {
                 $this->db->set("tOneTimeTransaction", $params_arr["one_time_transaction_data"]);
             }
             $res = $this->db->update("users");
             $affected_rows = $this->db->affected_rows();
-            if (!$res || $affected_rows == -1)
-            {
+            if (!$res || $affected_rows == -1) {
                 throw new Exception("Failure in updation.");
             }
             $result_param = "affected_rows";
             $result_arr[0][$result_param] = $affected_rows;
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }
@@ -2232,11 +1992,9 @@ class Users_model extends CI_Model
      */
     public function delete_user_account($params_arr = array(), $where_arr = array())
     {
-        try
-        {
+        try {
             $result_arr = array();
-            if (isset($where_arr["user_id"]) && $where_arr["user_id"] != "")
-            {
+            if (isset($where_arr["user_id"]) && $where_arr["user_id"] != "") {
                 $this->db->where("iUserId =", $where_arr["user_id"]);
             }
 
@@ -2246,16 +2004,13 @@ class Users_model extends CI_Model
             $this->db->set($this->db->protect("dtDeletedAt"), $params_arr["_dtdeletedat"], FALSE);
             $res = $this->db->update("users");
             $affected_rows = $this->db->affected_rows();
-            if (!$res || $affected_rows == -1)
-            {
+            if (!$res || $affected_rows == -1) {
                 throw new Exception("Failure in updation.");
             }
             $result_param = "affected_rows";
             $result_arr[0][$result_param] = $affected_rows;
             $success = 1;
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $success = 0;
             $message = $e->getMessage();
         }

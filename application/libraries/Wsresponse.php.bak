@@ -680,46 +680,30 @@ class Wsresponse
         // insert API accesslog response => Start
         if (is_array($exec_data) && count($exec_data) > 0 ) {
 
-            // $this->CI->db->select('vFileName');
-            // $this->CI->db->where('iAccessLogId', $exec_data['api_log_id']);
-            // $db_rec_obj = $this->CI->db->from('api_accesslogs')->get();
-            // $result = is_object($db_rec_obj) ? $db_rec_obj->row_array() : array();
+            $this->CI->db->select('vFileName');
+            $this->CI->db->where('iAccessLogId', $exec_data['api_log_id']);
+            $db_rec_obj = $this->CI->db->from('api_accesslogs')->get();
+            $result = is_object($db_rec_obj) ? $db_rec_obj->row_array() : array();
             
-            // if(!empty($result)){
-            //     $access_log_folder = $this->CI->config->item('admin_access_log_path');
-            //     $log_folder_path = $access_log_folder . "api_logs" . DS ;
-            //     $log_file_path = $log_folder_path . $result['vFileName'];
+            if(!empty($result)){
+                $access_log_folder = $this->CI->config->item('admin_access_log_path');
+                $log_folder_path = $access_log_folder . "api_logs" . DS ;
+                $log_file_path = $log_folder_path . $result['vFileName'];
 
-            //     $json_data = file_get_contents($log_file_path);
-            //     $input_params = json_decode($json_data, true);
+                $json_data = file_get_contents($log_file_path);
+                $input_params = json_decode($json_data, true);
                 
-            //     $fileContents['input_params'] = $input_params['input_params'];
-            //     if(empty($arr['queries']))
-            //     {
-            //         $arr['queries'] = $this->CI->general->getDBQueriesList();    
-            //     }
-            //     $fileContents['output_response'] = $arr;
+                $fileContents['input_params'] = $input_params['input_params'];
+                if(empty($arr['queries']))
+                {
+                    $arr['queries'] = $this->CI->general->getDBQueriesList();    
+                }
+                $fileContents['output_response'] = $arr;
 
-            //     $outputArr['output_response'] = $arr;
-
-            //     $fp = fopen($log_file_path, 'w');
-            //     fwrite($fp, json_encode($fileContents));
-            //     fclose($fp);
-            // }
-
-            if (empty($arr['queries'])) {
-                $arr['queries'] = $this->CI->general->getDBQueriesList();
+                $fp = fopen($log_file_path, 'w');
+                fwrite($fp, json_encode($fileContents));
+                fclose($fp);
             }
-            $outputArr['output_response'] = $arr;
-            $start_time = $this->CI->session->userdata('start_time');
-        
-            $end_time = microtime(true);
-      
-            // Calculate script execution time
-            $execution_time = ($end_time - $start_time);
-           
-            $this->CI->benchmark->mark('code_end');
-
             if($exec_data['api_log_id'] > 0){
                 $updateArr = array();
                 if($this->CI->session->userdata('iUserId')){
@@ -732,23 +716,8 @@ class Wsresponse
                     $result = $this->CI->db->get()->result_array();
                     $userid = $result[0]['iUserId'];
 
-                    //$updateArr['iPerformedBy'] = () ? $userid : NULL;
-                    if (false == empty($userid)) {
-                        $updateArr['iPerformedBy'] = $userid;
-                    } else {
-                        $this->CI->db->select('jInputParam');
-                        $this->CI->db->where('iAccessLogId', $exec_data['api_log_id']);
-                        $db_rec_obj = $this->CI->db->from('api_accesslogs')->get();
-                        $result = is_object($db_rec_obj) ? $db_rec_obj->row_array() : array();
-                        if (!empty($result)) {
-                            $input_params = json_decode($result['jInputParam'], true);
-                            $updateArr['iPerformedBy'] = $input_params['input_params']['post']['email'];
-                        }
-
-                    }
+                    $updateArr['iPerformedBy'] = (false == empty($userid)) ? $userid : NULL;
                 }
-                $updateArr['fExcutionTime'] = $this->CI->benchmark->elapsed_time('code_start', 'code_end');
-                $updateArr['jOutputResponse'] = json_encode($outputArr);
                 $updateArr['dtExecutedDate'] = date('Y-m-d H:i:s');
                 $this->CI->db->where('iAccessLogId', $exec_data['api_log_id']);
                 $this->CI->db->update('api_accesslogs', $updateArr);

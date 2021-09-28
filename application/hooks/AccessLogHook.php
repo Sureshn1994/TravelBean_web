@@ -18,7 +18,7 @@ class AccessLogHook
 
     public function http_request_log($params = array())
     {
-
+        $this->CI->benchmark->mark('code_start');
         $this->params = $params;
 
         if ($this->CI->config->item("is_admin") == 1) {
@@ -148,7 +148,6 @@ class AccessLogHook
 
     public function get_logging_data()
     {
-
         $params_arr = array();
         $date_format = $this->params['log_date_format'];
         $request_type = $this->params['type'];
@@ -194,28 +193,33 @@ EOD;
         list($start_micro, $start_date) = explode(" ", $start_time);
         $access_date = date("Y-m-d H:i:s", $start_date);
 
-        $access_log_folder = $this->CI->config->item('admin_access_log_path');
-        if (!is_dir($access_log_folder)) {
-            $this->CI->general->createFolder($access_log_folder);
-        }
+        // $access_log_folder = $this->CI->config->item('admin_access_log_path');
+        // if (!is_dir($access_log_folder)) {
+        //     $this->CI->general->createFolder($access_log_folder);
+        // }
 
-        $log_folder_path = $access_log_folder . "api_logs" . DS;
-        //echo $log_folder_path;die;
-        if (!is_dir($log_folder_path)) {
-            $this->CI->general->createFolder($log_folder_path);
-        }
-        $log_file_ext = 'json';
+        // $log_folder_path = $access_log_folder . "api_logs" . DS;
+        // //echo $log_folder_path;die;
+        // if (!is_dir($log_folder_path)) {
+        //     $this->CI->general->createFolder($log_folder_path);
+        // }
+        // $log_file_ext = 'json';
 
-        $file_name = $request_func . "-" . $start_date . "." . $log_file_ext;
+        // $file_name = $request_func . "-" . $start_date . "." . $log_file_ext;
 
-        $log_file_path = $log_folder_path . $file_name;
+        // $log_file_path = $log_folder_path . $file_name;
+        
+        // $fileContents['input_params'] = $input_params_arr;
+
+        // $fp = fopen($log_file_path, 'a+');
+        // fwrite($fp, json_encode($fileContents));
+        // fclose($fp);
+
         
         $fileContents['input_params'] = $input_params_arr;
-        $fp = fopen($log_file_path, 'a+');
-        fwrite($fp, json_encode($fileContents));
-        fclose($fp);
 
-        if(file_exists($log_file_path)){
+        //if(file_exists($log_file_path)){
+
             $data_array = array();
             $data_array['vIPAddress']  = $ip_addr;
             $data_array['vAPIName']    = $request_func;
@@ -223,13 +227,14 @@ EOD;
             $data_array['dAccessDate'] = $access_date;
             $data_array['vPlatform']   = $plat_form;
             $data_array['vBrowser']    = $bowser;
-            $data_array['vFileName']   = $file_name;
-            $data_array['vRequestMethod']   = $request_method;            
+            $data_array['vFileName']   = "0";
+            $data_array['vRequestMethod']   = $request_method;
+            $data_array['jInputParam'] = json_encode($fileContents);
             $result = $this->CI->db->insert('api_accesslogs', $data_array);
             if($result > 0){
                 $exe_arr['api_log_id']  = $result;
             }
-        }
+       // }
         // Access Logs insertion => end
 
         return array($log_str, $exe_arr);

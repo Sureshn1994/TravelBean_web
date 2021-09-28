@@ -137,7 +137,18 @@
         "name": "aa_request_method",
         "label": "<%$list_config['aa_request_method']['label_lang']%>"
     },
-    
+    {
+        "name": "aa_excution_time",
+        "label": "<%$list_config['aa_excution_time']['label_lang']%>"
+    },
+    {
+        "name": "aa_error_type",
+        "label": "<%$list_config['aa_error_type']['label_lang']%>"
+    },
+    {
+        "name": "aa_error_message",
+        "label": "<%$list_config['aa_error_message']['label_lang']%>"
+    },
     {
         "name": "aa_i_paddress",
         "label": "<%$list_config['aa_i_paddress']['label_lang']%>"
@@ -319,7 +330,126 @@
         "default_value": "<%$list_config['aa_request_method']['default']%>",
         "filterSopt": "bw"
     },
-  
+    {
+        "name": "aa_excution_time",
+        "index": "aa_excution_time",
+        "label": "<%$list_config['aa_excution_time']['label_lang']%>",
+        "labelClass": "header-align-left",
+        "resizable": true,
+        "width": "<%$list_config['aa_excution_time']['width']%>",
+        "search": <%if $list_config['aa_excution_time']['search'] eq 'No' %>false<%else%>true<%/if%>,
+        "export": <%if $list_config['aa_excution_time']['export'] eq 'No' %>false<%else%>true<%/if%>,
+        "sortable": <%if $list_config['aa_excution_time']['sortable'] eq 'No' %>false<%else%>true<%/if%>,
+        "hidden": <%if $list_config['aa_excution_time']['hidden'] eq 'Yes' %>true<%else%>false<%/if%>,
+        "hideme": <%if $list_config['aa_excution_time']['hideme'] eq 'Yes' %>true<%else%>false<%/if%>,
+        "addable": <%if $list_config['aa_excution_time']['addable'] eq 'Yes' %>true<%else%>false<%/if%>,
+        "editable": <%if $list_config['aa_excution_time']['editable'] eq 'Yes' %>true<%else%>false<%/if%>,
+        "align": "left",
+        "edittype": "text",
+        "editrules": {
+            "infoArr": []
+        },
+        "searchoptions": {
+            "attr": {
+                "aria-grid-id": el_tpl_settings.main_grid_id,
+                "aria-module-name": "api_access_logs",
+                "aria-unique-name": "aa_excution_time",
+                "autocomplete": "off"
+            },
+            "sopt": strSearchOpts,
+            "searchhidden": <%if $list_config['aa_excution_time']['search'] eq 'Yes' %>true<%else%>false<%/if%>
+        },
+        "editoptions": {
+            "aria-grid-id": el_tpl_settings.main_grid_id,
+            "aria-module-name": "api_access_logs",
+            "aria-unique-name": "aa_excution_time",
+            "placeholder": "",
+            "class": "inline-edit-row "
+        },
+        "ctrl_type": "textbox",
+        "default_value": "<%$list_config['aa_excution_time']['default']%>",
+        "filterSopt": "bw"
+    },
+    {
+        "name": "aa_error_type",
+        "index": "aa_error_type",
+        "label": "<%$list_config['aa_error_type']['label_lang']%>",
+        "labelClass": "header-align-left",
+        "resizable": true,
+        "width": "<%$list_config['aa_error_type']['width']%>",
+        "search": <%if $list_config['aa_error_type']['search'] eq 'No' %>false<%else%>true<%/if%>,
+        "export": <%if $list_config['aa_error_type']['export'] eq 'No' %>false<%else%>true<%/if%>,
+        "sortable": <%if $list_config['aa_error_type']['sortable'] eq 'No' %>false<%else%>true<%/if%>,
+        "hidden": <%if $list_config['aa_error_type']['hidden'] eq 'Yes' %>true<%else%>false<%/if%>,
+        "hideme": <%if $list_config['aa_error_type']['hideme'] eq 'Yes' %>true<%else%>false<%/if%>,
+        "addable": <%if $list_config['aa_error_type']['addable'] eq 'Yes' %>true<%else%>false<%/if%>,
+        "editable": <%if $list_config['aa_error_type']['editable'] eq 'Yes' %>true<%else%>false<%/if%>,
+        "align": "left",
+        "edittype": "text",
+        "editrules": {
+            "infoArr": []
+        },
+        "searchoptions": {
+            "attr": {
+                "aria-grid-id": el_tpl_settings.main_grid_id,
+                "aria-module-name": "api_access_logs",
+                "aria-unique-name": "aa_error_type",
+                "autocomplete": "off"
+            },
+            "sopt": strSearchOpts,
+            "searchhidden": <%if $list_config['aa_error_type']['search'] eq 'Yes' %>true<%else%>false<%/if%>
+        },
+        "editoptions": {
+            "aria-grid-id": el_tpl_settings.main_grid_id,
+            "aria-module-name": "api_access_logs",
+            "aria-unique-name": "aa_error_type",
+            "placeholder": "",
+            "class": "inline-edit-row "
+        },
+        "ctrl_type": "textbox",
+        "default_value": "<%$list_config['aa_error_type']['default']%>",
+        "filterSopt": "bw"
+    },
+    {
+        "name": "aa_error_message",
+        "index": "aa_error_message",
+        "label": "<%$list_config['aa_error_message']['label_lang']%>",
+        "labelClass": "header-align-left",
+        "resizable": true,
+        "width": "<%$list_config['aa_error_message']['width']%>",
+        "search": <%if $list_config['aa_error_message']['search'] eq 'No' %>false<%else%>true<%/if%>,
+        "export": <%if $list_config['aa_error_message']['export'] eq 'No' %>false<%else%>true<%/if%>,
+        "sortable": <%if $list_config['aa_error_message']['sortable'] eq 'No' %>false<%else%>true<%/if%>,
+        "hidden": <%if $list_config['aa_error_message']['hidden'] eq 'Yes' %>true<%else%>false<%/if%>,
+        "hideme": <%if $list_config['aa_error_message']['hideme'] eq 'Yes' %>true<%else%>false<%/if%>,
+        "addable": <%if $list_config['aa_error_message']['addable'] eq 'Yes' %>true<%else%>false<%/if%>,
+        "editable": <%if $list_config['aa_error_message']['editable'] eq 'Yes' %>true<%else%>false<%/if%>,
+        "align": "left",
+        "edittype": "text",
+        "editrules": {
+            "infoArr": []
+        },
+        "searchoptions": {
+            "attr": {
+                "aria-grid-id": el_tpl_settings.main_grid_id,
+                "aria-module-name": "api_access_logs",
+                "aria-unique-name": "aa_error_message",
+                "autocomplete": "off"
+            },
+            "sopt": strSearchOpts,
+            "searchhidden": <%if $list_config['aa_error_message']['search'] eq 'Yes' %>true<%else%>false<%/if%>
+        },
+        "editoptions": {
+            "aria-grid-id": el_tpl_settings.main_grid_id,
+            "aria-module-name": "api_access_logs",
+            "aria-unique-name": "aa_error_message",
+            "placeholder": "",
+            "class": "inline-edit-row "
+        },
+        "ctrl_type": "textbox",
+        "default_value": "<%$list_config['aa_error_message']['default']%>",
+        "filterSopt": "bw"
+    },
     {
         "name": "aa_i_paddress",
         "index": "aa_i_paddress",

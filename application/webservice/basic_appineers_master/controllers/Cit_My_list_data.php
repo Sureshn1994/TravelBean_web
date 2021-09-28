@@ -8,9 +8,6 @@
  * 
  * @path application\webservice\basic_appineers_master\controllers\Cit_My_list_data.php
  * 
- * @author Suresh Nakate
- * 
- * @date 08.03.2021
  */        
 
 if (!defined('BASEPATH')) {
@@ -18,10 +15,20 @@ if (!defined('BASEPATH')) {
 }
  
 Class Cit_My_list_data extends My_list_data {
+   /**
+     * To initialize class objects/variables.
+     */
   public function __construct()
   {
       parent::__construct();
   }
+   /**
+     * Used to Check list exist.
+     *
+     * @param array $input_params input_params array to process loop flow.
+     *
+     * @return array $return_arr return where condition.
+     */
   public function checkListExist($input_params=array()){
       $return_arr['message']='';
      	$return_arr['status']='1';
@@ -51,7 +58,3 @@ Class Cit_My_list_data extends My_list_data {
 
 
 }
-
- 
-
-?>

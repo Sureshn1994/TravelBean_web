@@ -42,7 +42,7 @@ class Get_config_paramaters extends Cit_Controller
             "get_config_params",
         );
         $this->block_result = array();
-
+		 $this->load->library('lib_log');
         $this->load->library('wsresponse');
         $this->load->model('get_config_paramaters_model');
     }
@@ -171,6 +171,7 @@ class Get_config_paramaters extends Cit_Controller
             'ziptax_api_key',
             'barcode_lookup_api_key',
             'fixer_api_key',
+            'address',
         );
         $output_keys = array(
             'get_config_params',
